@@ -1,0 +1,11 @@
+packages: [
+  "color-picker"
+  "grammar-token-limit"
+  "ink"
+  "language-pfm"
+  "oceanic-next"
+  "package-sync"
+  "Parinfer"
+  "proto-repl"
+  "react"
+]

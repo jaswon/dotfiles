@@ -1,0 +1,7 @@
+.atom/.apm
+.atom/nohup.out
+.atom/compile-cache
+.atom/packages
+.atom/storage
+.atom/.node-gyp
+
