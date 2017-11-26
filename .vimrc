@@ -5,14 +5,7 @@ map s <nop>
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Auto-pairs'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'easymotion/vim-easymotion'
-call vundle#end()
+execute pathogen#infect()
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -35,12 +28,9 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
-" gui setup
-set guifont=Operator\ Mono\ Light:h13
-
 " latex stuff
 let g:tex_flavor="latex"
-autocmd Filetype tex setlocal errorformat=%f:%l:\ %m makeprg=latex\ -interaction=nonstopmode\ -file-line-error\ -output-format=pdf\ %
+" autocmd Filetype tex setlocal errorformat=%f:%l:\ %m makeprg=latex\ -interaction=nonstopmode\ -file-line-error\ -output-format=pdf\ %
 
 filetype plugin indent on
 
