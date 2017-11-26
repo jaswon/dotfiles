@@ -32,6 +32,7 @@ map <Leader>l <Plug>(easymotion-lineforward)
 let g:tex_flavor="latex"
 " autocmd Filetype tex setlocal errorformat=%f:%l:\ %m makeprg=latex\ -interaction=nonstopmode\ -file-line-error\ -output-format=pdf\ %
 
+syntax on
 filetype plugin indent on
 
 " tabbing setup
