@@ -1,4 +1,4 @@
-DOTS := $$(find . -depth 1 -name ".*" \! -name "*git*" | xargs -n1 basename)
+DOTS := $$(find . -maxdepth 1 -name ".*" \! -name "*git*" |  xargs -n1 basename)
 
 .PHONY: list
 
@@ -12,6 +12,7 @@ deploy: ## symlink to home
 
 update: ## fetch changes
 	git pull origin master
+	git submodule update --init --recursive
 
 install: update deploy
 
