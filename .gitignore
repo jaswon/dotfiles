@@ -2,3 +2,4 @@
 .emacs.d/ido.last
 .emacs.d/eshell/*
 .emacs.d/auto-save-list/*
+.vim/.netrwhist
