@@ -57,9 +57,9 @@
 *color15:               S_base3
 
 !! urxvt
-URxvt.font: xft:boxxy:size=12,xft:Wuncon Siji:size=12
+URxvt.font: xft:Gohu GohuFont:size=16,xft:Wuncon Siji:size=12
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
 
 !! rofi
-rofi.font: boxxy 12
+rofi.font: Gohu GohuFont 12
