@@ -5,7 +5,7 @@ dunst &
 
 while true; do
   sh .xsetroot.sh
-  sleep 5s
+  sleep .5s
 done &
 
 exec dwm
