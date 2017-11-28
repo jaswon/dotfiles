@@ -1,4 +1,4 @@
-DOTS := $$(find . -maxdepth 1 -name ".*" \! -name "*git*" |  xargs -n1 basename)
+DOTS := $$(find . -maxdepth 1 \! -name "*git*" | grep "./\..*" |  xargs -n1 basename)
 
 .PHONY: list
 
