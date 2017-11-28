@@ -11,13 +11,10 @@
 (global-linum-mode)
 
 ;; font
-(set-face-attribute 'default nil :family "Fixed" :height 100)
+(set-face-attribute 'default nil :family "GohuFont" :height 160)
 
 ;; initial frame
-(setq initial-frame-alist '((top . 150)
-			    (left . 750)
-			    (width . 100)
-			    (height . 50)))
+;;(setq initial-frame-alist '((top . 150) (left . 750) (width . 100) (height . 50)))
 
 ;; no bell
 (setq ring-bell-function 'ignore)

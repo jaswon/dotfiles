@@ -9,7 +9,7 @@
 
 
 ;; remap cmd to M-
-(setq mac-command-modifier 'meta) 
+;; (setq mac-command-modifier 'meta) 
 
 ;; insert newline on previous line
 (global-set-key (kbd "<C-return>") 
