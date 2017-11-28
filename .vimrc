@@ -86,3 +86,6 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
+
+" write as sudo
+" cmap w!! w !sudo tee > /dev/null %
