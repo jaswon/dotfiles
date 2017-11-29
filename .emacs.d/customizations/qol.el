@@ -11,6 +11,10 @@
 ;; remap cmd to M-
 ;; (setq mac-command-modifier 'meta) 
 
+;; remap meta to super
+(setq x-super-keysym 'meta)
+
+
 ;; insert newline on previous line
 (global-set-key (kbd "<C-return>") 
 		(lambda () (interactive)
