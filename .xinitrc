@@ -8,4 +8,6 @@ while true; do
   sleep .5s
 done &
 
+(sleep .5s && urxvt) &
+
 exec dwm
