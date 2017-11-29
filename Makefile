@@ -1,4 +1,5 @@
-DOTS := $$(find . -maxdepth 1 \! -name "*git*" | grep "./\..*" |  xargs -n1 basename)
+# DOTS := $$(find . -maxdepth 1 \! -name "*git*" | grep "./\..*" |  xargs -n1 basename)
+DOTS := $(wildcard .[!.g]*)
 
 .PHONY: list
 
