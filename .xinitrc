@@ -2,6 +2,7 @@
 [[ -f ~/.Xmodmap ]] & xmodmap ~/.Xmodmap
 
 dunst &
+dropbox &
 
 while true; do
   sh .xsetroot.sh
