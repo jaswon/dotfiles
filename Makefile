@@ -1,21 +1,33 @@
-# DOTS := $$(find . -maxdepth 1 \! -name "*git*" | grep "./\..*" |  xargs -n1 basename)
-DOTS := $(wildcard .[!.g]*)
-
-.PHONY: list
-
-all:
+DOTS=\
+assets \
+.bash_prompt \
+.bash_profile \
+.emacs.d \
+.gitconfig \
+.tmux.conf \
+.vim \
+.vimrc \
+.xinitrc \
+.Xmodmap \
+.Xresources \
+.xsetroot.sh
+ 
+install: clean update deploy
 
 list: ## show dots in this repo
-	@echo $(DOTS)
+	@echo -e "\n---\nshowing dots\n---\n"
+	@for fname in $(DOTS); do echo $(abspath $$fname); done
 
 deploy: ## symlink to home
+	@echo -e "\n---\nsymlinking dots\n---\n"
 	for fname in $(DOTS); do ln -sfnv $(abspath $$fname) $(HOME)/$$fname ; done
 
 update: ## fetch changes
-	git pull origin master
-	git submodule update --init --recursive
-
-install: update deploy
+	@echo -e "\n---\nfetching changes\n---\n"
+	-git pull origin master
+	-git submodule update --init --recursive
 
 clean: ## remove dots in home
+	@echo -e "\n---\nremoving dots in home\n---\n"
 	for fname in $(DOTS); do rm -vrf $(HOME)/$$fname ; done
+
