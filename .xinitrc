@@ -1,6 +1,7 @@
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] & xmodmap ~/.Xmodmap
 
+compton &
 dunst &
 dropbox &
 
@@ -9,6 +10,8 @@ while true; do
   sleep .5s
 done &
 
-(sleep .5s && urxvt) &
+urxvt &
+
+feh --bg-fill ~/assets/wal/lash.png
 
 exec dwm
