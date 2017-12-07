@@ -14,6 +14,7 @@ pom() { if [ -d .git ]; then git push origin master; fi; }
 export EDITOR='vim'
 export PS1="\[\e[1;36m\]\W \$ \[\e[m\]"
 export LS_COLORS=$LS_COLORS:'di=1;44:'
+export PATH=$PATH:~/bin
 
 . ~/.bash_prompt
 

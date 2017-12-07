@@ -10,7 +10,12 @@ assets \
 .xinitrc \
 .Xmodmap \
 .Xresources \
-.xsetroot.sh
+.xsetroot.sh \
+bin/bar \
+bin/status \
+.config/bspwm \
+.config/sxhkd \
+.config/dunst
  
 install: clean update deploy
 

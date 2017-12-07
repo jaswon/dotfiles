@@ -1,0 +1,45 @@
+[[ -e $BAR_FIFO ]] && rm $BAR_FIFO
+mkfifo $BAR_FIFO
+
+while true; do
+#  date '+TIME(%^a) %b %-d, %Y %I:%M:%S %p'
+#  iw dev $INTERFACE link | grep SSID | awk '{print "SSID" $2}'
+#  awk 'NR==3 {printf("LINK%2.0f", $3/.7)}' /proc/net/wireless
+#  acpi | awk '{print "BATT" $3 ":" $4}' | sed 's/[,%]//g'
+  bash barinfo
+  sleep 1;
+done > $BAR_FIFO &
+
+xtitle -st 50 -f "T%s\n" > $BAR_FIFO &
+bspc subscribe report > $BAR_FIFO &
+
+font1='Gohu GohuFont:pixelsize=16:0' 
+font2='Wuncon Siji:pixelsize=14:0'
+
+while read -r barinfo; do
+  case ${barinfo::1} in
+    "[") sys=$barinfo ;;
+    "T") title=${barinfo#?} ;;
+    "W")
+      wm=''
+      IFS=':'
+      set -- ${barinfo#?}
+      while [[ $# -gt 0 ]]; do
+        name=${1#?}
+        [[ ${1::1} =~ [UFO] ]] && wm+='%{+u}'
+        wm+="%{A:bspc desktop $name -f:}"
+        case ${1::1} in
+          [Ff]) wm+="$name" ;;
+          [Oo]) wm+="%{F#fa0}$name%{F-}" ;;
+          [Uu]) wm+="%{F#f00}$name%{F-}" ;;
+        esac
+        wm+='%{A}%{-u}  '
+        shift
+      done
+      ;;
+  esac
+  echo "$wm%{c}$title%{r}$sys "
+done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -F '#fff' -gx30 -f "$font1" -f "$font2" | sh &
+
+# trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
+wait
