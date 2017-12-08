@@ -1,9 +1,9 @@
 INTERFACE="wlp1s0"
-SSID=$(iw dev "$INTERFACE" link | grep SSID | sed 's/.*: //')
+SSID=$(iw dev "$INTERFACE" link | awk '/SSID/{print $2}')
 TIME=$(date '+(%^a) %b %-d, %Y %I:%M:%S %p')
-BATT_PERC=$(acpi | sed 's/.*, \([0-9]\+\)%.*/\1/')
-BATT_STATE=$(acpi | sed 's/.*: \([a-zA-Z]\+\).*/\1/')
-WIFI=$(awk '/'$INTERFACE'/ {printf("%2.0f", $3 / 70 * 100);}' /proc/net/wireless)
+BATT_STATE=$(acpi | awk -F "[ ,]" '{print $3}')
+BATT_PERC=$(acpi | awk -F "[,% ]" '{print $5}')
+WIFI=$(awk 'NR==3 {printf("%2.0f", $3/.7);}' /proc/net/wireless)
 VOLUME=$(amixer sget Master | grep % | sed 's/%.*//;s/.*\[//')
 MUTED=$(amixer sget Master | grep % | sed 's/.*\[//;s/\]//' | grep off)
 

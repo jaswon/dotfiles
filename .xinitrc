@@ -1,4 +1,5 @@
 export BAR_FIFO=/tmp/bar.fifo
+PATH=$PATH:~/bin
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] & xmodmap ~/.Xmodmap

@@ -12,7 +12,7 @@ assets \
 .Xresources \
 .xsetroot.sh \
 bin/bar \
-bin/status \
+bin/barinfo \
 .config/bspwm \
 .config/sxhkd \
 .config/dunst

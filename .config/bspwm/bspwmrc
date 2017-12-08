@@ -16,5 +16,6 @@ bspc config gapless_monocle      false
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Chromium desktop='^2'
 bspc rule -a Spotify desktop='^4' follow=on
+bspc rule -a Xournal desktop='^3' follow=on
 
-sh bar
+bar &

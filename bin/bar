@@ -1,3 +1,5 @@
+#!/bin/sh
+
 [[ -e $BAR_FIFO ]] && rm $BAR_FIFO
 mkfifo $BAR_FIFO
 
@@ -6,7 +8,7 @@ while true; do
 #  iw dev $INTERFACE link | grep SSID | awk '{print "SSID" $2}'
 #  awk 'NR==3 {printf("LINK%2.0f", $3/.7)}' /proc/net/wireless
 #  acpi | awk '{print "BATT" $3 ":" $4}' | sed 's/[,%]//g'
-  bash barinfo
+  barinfo
   sleep 1;
 done > $BAR_FIFO &
 
@@ -29,8 +31,8 @@ while read -r barinfo; do
         [[ ${1::1} =~ [UFO] ]] && wm+='%{+u}'
         wm+="%{A:bspc desktop $name -f:}"
         case ${1::1} in
-          [Ff]) wm+="$name" ;;
-          [Oo]) wm+="%{F#fa0}$name%{F-}" ;;
+          [Ff]) wm+="%{F#aaa}$name%{F-}" ;;
+          [Oo]) wm+="%{F#fff}$name%{F-}" ;;
           [Uu]) wm+="%{F#f00}$name%{F-}" ;;
         esac
         wm+='%{A}%{-u}  '
@@ -39,7 +41,7 @@ while read -r barinfo; do
       ;;
   esac
   echo "$wm%{c}$title%{r}$sys "
-done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -F '#fff' -gx30 -f "$font1" -f "$font2" | sh &
+done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | sh &
 
 # trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
 wait
