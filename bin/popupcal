@@ -1,6 +1,7 @@
 #!/bin/sh
 
-font='Gohu GohuFont:pixelsize=16:0'
+# font='Gohu GohuFont:pixelsize=16:0'
+font='Misc Tamsyn:pixelsize=14:0'
 act='onstart=uncollapse,grabkeys;button1=exit:0;key_Escape=exit:0;onexit=exec:pkill tail'
 hl='#f00'
 x=1728

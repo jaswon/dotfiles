@@ -55,12 +55,13 @@ URxvt*color15: #EEEEEC
 
 !! urxvt
 !! URxvt.font: xft:Gohu GohuFont:size=16,xft:Wuncon Siji:size=12
-URxvt.font: xft:scientifica,xft:Wuncon Siji:size=12
+!! URxvt.font: xft:scientifica,xft:Wuncon Siji:size=12
+URxvt.font: xft:Misc Tamsyn:pixelsize=14,xft:Wuncon Siji:size=12
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
 URxvt.loginShell: true
 URxvt.internalBorder: 15
-URxvt.letterSpace: 3
+!! URxvt.letterSpace: 1
 
 !! rofi
 rofi.font: Gohu GohuFont 12

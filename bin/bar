@@ -55,8 +55,8 @@ done > $BAR_FIFO &
 xtitle -st 50 -f "TITLE%s\n" > $BAR_FIFO &
 bspc subscribe report > $BAR_FIFO &
 
-font1='Gohu GohuFont:pixelsize=16:0' 
-# font1='Scientifica:pixelsize=20:0' 
+# font1='Gohu GohuFont:pixelsize=16:0' 
+font1='Misc Tamsyn:pixelsize=14:0' 
 font2='Wuncon Siji:pixelsize=14:0'
 
 while read -r barinfo; do
