@@ -4,7 +4,7 @@ export PATH=$PATH:~/bin
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
-compton &
+compton -backend xrender &
 dunst &
 dropbox &
 
