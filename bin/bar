@@ -1,31 +1,92 @@
 #!/bin/sh
 
+INTERFACE="wlp1s0"
+
 [[ -e $BAR_FIFO ]] && rm $BAR_FIFO
 mkfifo $BAR_FIFO
 
+clock () { date '+TIME(%^a) %b %-d, %Y %I:%M %p'; }
+wifi () {
+  local SSID=$(iw dev "$INTERFACE" link | awk '/SSID/{print $2}')
+  local WIFI=$(awk 'NR==3 {printf("%2.0f", $3/.7);}' /proc/net/wireless)
+  local WIFI_SYM=
+  if [[ $WIFI -gt 66 ]]; then
+    WIFI_SYM='\U00e21a'
+  elif [[ $WIFI -gt 33 ]]; then
+    WIFI_SYM='\U00e219'
+  elif [[ $WIFI -gt 0 ]]; then
+    WIFI_SYM='\U00e218'
+  else
+    WIFI_SYM='\U00e217'
+  fi
+  echo -e "WIFI$WIFI_SYM $SSID"
+}
+volume () {
+  local VOLUME=$(amixer sget Master | grep % | sed 's/%.*//;s/.*\[//')
+  local MUTED=$(amixer sget Master | grep % | sed 's/.*\[//;s/\]//' | grep off)
+  local VOL_SYM=
+  if [[ -n $MUTED ]]; then
+    VOL_SYM='\U00e202'
+  else
+    VOL_SYM='\U00e203'
+  fi
+  echo -e "VOL$VOL_SYM $VOLUME"
+}
+battery_state () { printf 'BATTSTATE%s\n' "$(cat /sys/class/power_supply/BAT0/status)"; }
+battery_perc () { printf 'BATTPERC%s\n' "$(cat /sys/class/power_supply/BAT0/capacity)"; }
+
 while true; do
-#  date '+TIME(%^a) %b %-d, %Y %I:%M:%S %p'
-#  iw dev $INTERFACE link | grep SSID | awk '{print "SSID" $2}'
-#  awk 'NR==3 {printf("LINK%2.0f", $3/.7)}' /proc/net/wireless
-#  acpi | awk '{print "BATT" $3 ":" $4}' | sed 's/[,%]//g'
-  barinfo
-  sleep 1;
+  clock
+  battery_perc
+  sleep 1m
 done > $BAR_FIFO &
 
-xtitle -st 50 -f "T%s\n" > $BAR_FIFO &
+while true; do
+  volume
+  inotifywait -qe access /dev/snd/controlC0
+done > $BAR_FIFO &
+
+while true; do
+  wifi
+  battery_state
+  sleep 1
+done > $BAR_FIFO &
+
+xtitle -st 50 -f "TITLE%s\n" > $BAR_FIFO &
 bspc subscribe report > $BAR_FIFO &
 
 font1='Gohu GohuFont:pixelsize=16:0' 
+# font1='Scientifica:pixelsize=20:0' 
 font2='Wuncon Siji:pixelsize=14:0'
 
 while read -r barinfo; do
-  case ${barinfo::1} in
-    "[") sys=$barinfo ;;
-    "T") title=${barinfo#?} ;;
-    "W")
+  case $barinfo in
+    "TIME"*) bartime=${barinfo#TIME} ;;
+    "WIFI"*) barwifi=${barinfo#WIFI} ;;
+    "VOL"*) barvol=${barinfo#VOL} ;;
+    "BATT"*) 
+      case ${barinfo#BATT} in
+        "STATE"*) barbattstate=${barinfo#BATTSTATE} ;;
+        "PERC"*) barbattperc=${barinfo#BATTPERC} ;;
+      esac
+      barbattsym='\U00e211'
+      case $barbattstate in
+        'Full') barbattsym='\U00e200' ;;
+        'Discharging')
+          if [[ $barbattperc -gt 50 ]]; then
+            barbattsym='\U00e1ff'
+          elif [[ $barbattperc -gt 0 ]]; then
+            barbattsym='\U00e1fe'
+          fi
+          ;;
+        'Charging') barbattsym='\U00e201' ;;
+      esac
+      ;;
+    "TITLE"*) title=${barinfo#TITLE} ;;
+    "W"*)
       wm=''
       IFS=':'
-      set -- ${barinfo#?}
+      set -- ${barinfo#W}
       while [[ $# -gt 0 ]]; do
         name=${1#?}
         [[ ${1::1} =~ [UFO] ]] && wm+='%{+u}'
@@ -40,8 +101,8 @@ while read -r barinfo; do
       done
       ;;
   esac
-  echo "$wm%{c}$title%{r}$sys "
-done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | sh &
+  echo -e "$wm%{c}$title%{r}[ $barwifi ] [ $barvol ] [ $barbattsym $barbattperc ] %{A:popupcal:}[ $bartime ]%{A} "
+done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | bash &
 
 # trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
 wait

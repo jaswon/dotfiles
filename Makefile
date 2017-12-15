@@ -1,7 +1,11 @@
 DOTS=\
 assets \
+bin \
 .bash_prompt \
 .bash_profile \
+.config/bspwm \
+.config/dunst \
+.config/sxhkd \
 .emacs.d \
 .gitconfig \
 .tmux.conf \
@@ -9,13 +13,7 @@ assets \
 .vimrc \
 .xinitrc \
 .Xmodmap \
-.Xresources \
-.xsetroot.sh \
-bin/bar \
-bin/barinfo \
-.config/bspwm \
-.config/sxhkd \
-.config/dunst
+.Xresources
  
 install: clean update deploy
 
