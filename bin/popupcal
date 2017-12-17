@@ -4,14 +4,16 @@
 font='Misc Tamsyn:pixelsize=14:0'
 act='onstart=uncollapse,grabkeys;button1=exit:0;key_Escape=exit:0;onexit=exec:pkill tail'
 hl='#f00'
-x=1728
-w=192
+x=1694
+y=30
+w=226
+h=36
 
 calfifo=/tmp/calfifo
 
 if [[ ! -e $calfifo ]]; then
   mkfifo $calfifo
-  ( tail -f "$calfifo" | dzen2 -l 8 -fn "$font" -fg "#fff" -bg "#333" -w $w -h 30 -y 30 -x $x -ta c -sa c -e "$act" -u -title-name "popup-calendar" -p
+  ( tail -f "$calfifo" | dzen2 -l 8 -fn "$font" -fg "#fff" -bg "#333" -w $w -h $h -y $y -x $x -ta c -sa c -e "$act" -u -title-name "popup-calendar" -p
   rm -f "$calfifo") &
 fi
 
