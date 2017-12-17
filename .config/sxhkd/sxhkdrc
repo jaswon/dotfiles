@@ -14,6 +14,10 @@ XF86Audio{Mute,LowerVolume,RaiseVolume}
 XF86Audio{Prev,Play,Next}
   playerctl {previous,play-pause,next}
 
+# screenshot
+Print
+  scrot '%F-%H%M%S.png' -e 'mv $f ~/stuff/scrots/' && dunstify -t 1 "scrot taken"
+
 # terminal emulator
 shift + alt + Return
 	urxvt -lsp 1
