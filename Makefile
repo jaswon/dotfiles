@@ -4,6 +4,7 @@ bin \
 .bash_prompt \
 .bash_profile \
 .config/bspwm \
+.config/compton.conf \
 .config/dunst \
 .config/sxhkd \
 .emacs.d \
