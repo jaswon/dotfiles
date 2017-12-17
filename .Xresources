@@ -64,4 +64,4 @@ URxvt.internalBorder: 15
 !! URxvt.letterSpace: 1
 
 !! rofi
-rofi.font: Gohu GohuFont 12
+rofi.font: Misc Tamsyn 11
