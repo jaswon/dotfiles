@@ -5,7 +5,7 @@ INTERFACE="wlp1s0"
 [[ -e $BAR_FIFO ]] && rm $BAR_FIFO
 mkfifo $BAR_FIFO
 
-clock () { date '+TIME(%^a) %b %-d, %Y %I:%M %p'; }
+clock () { date '+TIME(%^a) %b %_d, %Y %I:%M %p'; }
 wifi () {
   local SSID=$(iw dev "$INTERFACE" link | awk '/SSID/{print $2}')
   local WIFI=$(awk 'NR==3 {printf("%2.0f", $3/.7);}' /proc/net/wireless)
@@ -101,8 +101,8 @@ while read -r barinfo; do
       done
       ;;
   esac
-  echo -e "$wm%{c}$title%{r}[ $barwifi ] [ $barvol ] [ $barbattsym $barbattperc ] %{A:popupcal:}[ $bartime ]%{A} "
-done < $BAR_FIFO | lemonbar -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | bash &
+  echo -e "$wm%{c}%{A:slock:}$title%{A}%{r}%{A:sudo dhcpcd -N && dunstify -t 1 'renewed wifi address':}[ $barwifi ]%{A} %{A:sudo fix-audio.sh && dunstify -t 1 'audio fixed':}[ $barvol ]%{A} [ $barbattsym $barbattperc ] %{A:popupcal:}[ $bartime ]%{A} "
+done < $BAR_FIFO | lemonbar -a 15 -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | bash &
 
 # trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
 wait
