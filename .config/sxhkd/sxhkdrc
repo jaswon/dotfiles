@@ -8,7 +8,7 @@ XF86MonBrightness{Down,Up}
 
 # volume
 XF86Audio{Mute,LowerVolume,RaiseVolume}
-  volume.sh {m,d,u}
+  vol {m,d,u}
 
 # media controls
 XF86Audio{Prev,Play,Next}
