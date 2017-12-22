@@ -6,7 +6,7 @@ export PATH=$PATH:~/bin
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
-xset s off -dpms
+xset s off -dpms # prevent screen blanking
 
 compton --config ~/.config/compton.conf -b 
 dunst &
