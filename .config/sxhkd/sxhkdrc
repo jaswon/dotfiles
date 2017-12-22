@@ -3,8 +3,8 @@
 #
 
 # backlight
-XF86MonBrightness{Down,Up}
-  xbacklight {-,+}5%
+{_,ctrl + }XF86MonBrightness{Down,Up}
+  xbacklight {-5%,-1%,+5%,+1%}
 
 # volume
 XF86Audio{Mute,LowerVolume,RaiseVolume}
