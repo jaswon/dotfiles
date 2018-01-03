@@ -7,7 +7,7 @@ mkfifo $BAR_FIFO
 
 clock () { date '+TIME(%^a) %b %_d, %Y %I:%M %p'; }
 wifi () {
-  local SSID=$(iw dev "$INTERFACE" link | awk '/SSID/{print $2}')
+  local SSID=$(iw dev "$INTERFACE" link | grep SSID | cut -c8-)
   local WIFI=$(awk 'NR==3 {printf("%2.0f", $3/.7);}' /proc/net/wireless)
   local WIFI_SYM=
   if [[ $WIFI -gt 66 ]]; then
@@ -55,7 +55,6 @@ done > $BAR_FIFO &
 xtitle -st 50 -f "TITLE%s\n" > $BAR_FIFO &
 bspc subscribe report > $BAR_FIFO &
 
-# font1='Gohu GohuFont:pixelsize=16:0' 
 font1='Misc Tamsyn:pixelsize=14:0' 
 font2='Wuncon Siji:pixelsize=14:0'
 
@@ -101,7 +100,7 @@ while read -r barinfo; do
       done
       ;;
   esac
-  echo -e "$wm%{c}%{A:slock:}$title%{A}%{r}%{A:sudo dhcpcd -N && dunstify -t 1 'renewed wifi address':}[ $barwifi ]%{A} %{A:fixaudio && dunstify -t 1 'audio fixed':}[ $barvol ]%{A} [ $barbattsym $barbattperc ] %{A:popupcal:}[ $bartime ]%{A} "
+  echo -e "$wm%{c}$title%{r}[ $barwifi ] [ $barvol ] [ $barbattsym $barbattperc ] %{A:popupcal:}[ $bartime ]%{A} "
 done < $BAR_FIFO | lemonbar -a 15 -U '#0f0' -B '#333' -gx30 -f "$font1" -f "$font2" | bash &
 
 # trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
