@@ -12,6 +12,6 @@ compton --config ~/.config/compton.conf -b
 dunst &
 dropbox &
 
-feh --bg-fill ~/assets/wal/lash.png
+feh --bg-fill ~/dotfiles/assets/wal/lash.png
 
 exec bspwm

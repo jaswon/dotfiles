@@ -1,5 +1,4 @@
 DOTS=\
-assets \
 bin \
 .bash_prompt \
 .bash_profile \
