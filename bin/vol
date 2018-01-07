@@ -2,15 +2,15 @@
 
 case $1 in
   u)
-  	amixer -D pulse set Master on > /dev/null
+  	amixer set Master on > /dev/null
   	amixer set Master 5%+ > /dev/null
   	;;
   d)
-  	amixer -D pulse set Master on > /dev/null
+  	amixer set Master on > /dev/null
   	amixer set Master 5%- > /dev/null
   	;;
   m)
   	# Toggle mute
-  	amixer -D pulse set Master 1+ toggle > /dev/null
+  	amixer set Master toggle > /dev/null
   	;;
 esac
