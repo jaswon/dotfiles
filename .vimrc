@@ -57,6 +57,7 @@ set backspace=indent,eol,start
 set autowrite " write when make
 set timeoutlen=500
 set showcmd " show partial command in status 
+set background=dark
 
 " copy to clipboard
 map <Leader>c "*y
