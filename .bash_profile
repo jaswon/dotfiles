@@ -7,6 +7,7 @@ alias pls='sudo $(fc -ln -1)'
 alias staticserver='python3 -m http.server'
 alias e='$EDITOR'
 alias z='zathura'
+alias math='python -ic "from math import *"'
 # eval "$(hub alias -s)"
 
 # exports
