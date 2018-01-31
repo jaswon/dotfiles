@@ -29,8 +29,8 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
 " latex stuff
-let g:tex_flavor="latex"
-" autocmd Filetype tex setlocal errorformat=%f:%l:\ %m makeprg=latex\ -interaction=nonstopmode\ -file-line-error\ -output-format=pdf\ %
+let g:tex_flavor = "latex"
+let g:vimtex_view_method = 'zathura'
 
 syntax on
 filetype plugin indent on
