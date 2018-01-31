@@ -46,6 +46,9 @@ endfunction
 
 call TabSetup()
 
+" tabbing for Markdown
+au Filetype markdown setl ts=4 sts=4 sw=4 et
+
 set path+=**
 set wildmenu
 set number relativenumber
