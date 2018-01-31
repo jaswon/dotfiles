@@ -6,6 +6,7 @@ alias lal='ls -Alh'
 alias pls='sudo $(fc -ln -1)'
 alias staticserver='python3 -m http.server'
 alias e='$EDITOR'
+alias z='zathura'
 # eval "$(hub alias -s)"
 
 # exports
