@@ -15,8 +15,8 @@ XF86Audio{Mute,LowerVolume,RaiseVolume}
 #   playerctl {previous,play-pause,next}
 
 # screenshot
-Print
-  scrot '%F-%H%M%S.png' -e 'mv $f ~/stuff/scrots/' && dunstify -t 1 "scrot taken"
+{_,alt + }Print
+  maim {_,-s} ~/stuff/scrots/$(date +%F-%H%M%S).png && notify-send -t 1000 'scrot taken'
 
 # terminal emulator
 shift + alt + Return
@@ -27,7 +27,7 @@ alt + p
 	rofi -show run
 
 # make sxhkd reload its configuration files:
-super + Escape
+alt + Escape
 	pkill -USR1 -x sxhkd
 
 #
