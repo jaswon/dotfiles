@@ -3,9 +3,23 @@ let mapleader = "s"
 map s <nop>
 
 set nocompatible
-filetype off
 
-execute pathogen#infect()
+" vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'jiangmiao/auto-pairs'
+Plug 'SirVer/ultisnips'
+Plug 'easymotion/vim-easymotion'
+Plug 'honza/vim-snippets'
+Plug 'lervag/vimtex'
+
+call plug#end()
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"

@@ -4,3 +4,5 @@
 .emacs.d/auto-save-list/*
 .emacs.d/network-security.data
 .vim/.netrwhist
+.vim/plugged
+.vim/autoload/plug.vim
