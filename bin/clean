@@ -1,0 +1,6 @@
+#!/bin/sh
+
+case $1 in
+  on) xinput set-prop 11 140 0 ;;
+  off) xinput set-prop 11 140 1 ;;
+esac
