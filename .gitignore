@@ -3,6 +3,7 @@
 .emacs.d/eshell/*
 .emacs.d/auto-save-list/*
 .emacs.d/network-security.data
+.vim/spell
 .vim/.netrwhist
 .vim/plugged
 .vim/autoload/plug.vim
