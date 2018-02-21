@@ -13,13 +13,38 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
 Plug 'lervag/vimtex'
+Plug 'godlygeek/tabular'
+Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
+
+" NerdTree
+let NERDTreeQuitOnOpen = 1
+map <C-n> :NERDTreeToggle<CR>
+
+" Vimwiki
+let g:vimwiki_list = [ { 'path': '~/Dropbox/personal/wiki/', 'path_html': '~/Dropbox/personal/wiki/html/' } ]
+let g:vimwiki_dir_link = 'index'
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_quiet_messages = { "level": "warnings" }
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -75,9 +100,19 @@ set autowrite " write when make
 set timeoutlen=500
 set showcmd " show partial command in status 
 set background=dark
+set showmatch
 
-" copy to clipboard
+" cursorline
+highlight CursorLine cterm=NONE ctermbg=black
+set cursorline
+
+" 80 char
+highlight ColorColumn ctermbg=black
+set colorcolumn=80
+
+" clipboard
 map <Leader>c "*y
+map <S-Insert> <C-r>"
 
 " exit insert mode
 inoremap jj <esc>
