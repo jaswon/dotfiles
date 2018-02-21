@@ -14,7 +14,7 @@ alias math='python -ic "from math import *"'
 export EDITOR='vim'
 export PS1="\[\e[1;36m\]\W \$ \[\e[m\]"
 export LS_COLORS=$LS_COLORS:'di=1;44:'
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/.local/bin:~/bin
 
 . ~/.bash_prompt
 
