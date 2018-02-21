@@ -56,12 +56,14 @@ URxvt*color15: #EEEEEC
 !! urxvt
 !! URxvt.font: xft:Gohu GohuFont:size=16,xft:Wuncon Siji:size=12
 !! URxvt.font: xft:scientifica,xft:Wuncon Siji:size=12
-URxvt.font: xft:Misc Tamsyn:pixelsize=14,xft:Wuncon Siji:size=12
+!! URxvt.font: xft:Misc Tamsyn:pixelsize=14,xft:Wuncon Siji:size=12
+URxvt.font: xft:Inconsolata:pixelsize=14
 URxvt.intensityStyles: false
 URxvt.scrollBar: false
 URxvt.loginShell: true
 URxvt.internalBorder: 15
+URxvt.perl-ext-common: selection-to-clipboard
 !! URxvt.letterSpace: 1
 
 !! rofi
-rofi.font: Misc Tamsyn 11
+rofi.font: Inconsolata 13
