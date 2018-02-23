@@ -1,3 +1,4 @@
+*.swp
 .emacs.d/elpa/*
 .emacs.d/ido.last
 .emacs.d/eshell/*
