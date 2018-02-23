@@ -20,7 +20,7 @@ XF86Audio{Mute,LowerVolume,RaiseVolume}
 
 # terminal emulator
 shift + alt + Return
-	urxvt -lsp 1
+	termite
 
 # program launcher
 alt + p

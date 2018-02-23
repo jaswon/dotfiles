@@ -5,7 +5,9 @@ bin \
 .config/bspwm \
 .config/compton.conf \
 .config/dunst \
+.config/gtk-3.0 \
 .config/sxhkd \
+.config/termite \
 .emacs.d \
 .gitconfig \
 .tmux.conf \
