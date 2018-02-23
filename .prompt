@@ -1,12 +1,25 @@
 #!/bin/bash
 
 RED="\[\e[31m\]"
+YELLOW="\[\e[33m\]"
 GREEN="\[\e[32m\]"
 CYAN="\[\e[34m\]"
 RESET="\[\e[39m\]"
 
-function git_status () {
+function set_git_status () {
   git_status="$(git status 2> /dev/null)"
+  git_branch="$(git branch | cut -f 2 -d ' ')"
+
+  # Set color based on clean/staged/dirty.
+  if [[ ${git_status} =~ "working tree clean" ]]; then
+    state="${GREEN}"
+  elif [[ ${git_status} =~ "Changes to be committed" ]]; then
+    state="${YELLOW}"
+  else
+    state="${RED}"
+  fi
+
+  GITINFO=" ${state}(${git_branch})${RESET}"
 }
 
 function virtualenv_info () {
@@ -14,7 +27,12 @@ function virtualenv_info () {
 }
 
 function set_prompt () {
-  PS1="`virtualenv_info`${CYAN}\W \$ ${RESET}"
+  if [[ -d .git ]]; then
+    set_git_status
+  else
+    GITINFO=''
+  fi
+  PS1="`virtualenv_info`${CYAN}\W${GITINFO} \$ ${RESET}"
 }
 
 PROMPT_COMMAND=set_prompt
