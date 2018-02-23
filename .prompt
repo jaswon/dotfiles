@@ -1,38 +1,53 @@
 #!/bin/bash
 
+# heavily inspired by https://gist.github.com/insin/1425703
+
 RED="\[\e[31m\]"
 YELLOW="\[\e[33m\]"
 GREEN="\[\e[32m\]"
 CYAN="\[\e[34m\]"
 RESET="\[\e[39m\]"
 
-function set_git_status () {
-  git_status="$(git status 2> /dev/null)"
-  git_branch="$(git branch | cut -f 2 -d ' ')"
+function git_info () {
+  if [[ -d .git ]]; then
 
-  # Set color based on clean/staged/dirty.
-  if [[ ${git_status} =~ "working tree clean" ]]; then
-    state="${GREEN}"
-  elif [[ ${git_status} =~ "Changes to be committed" ]]; then
-    state="${YELLOW}"
+    git_status="$(git status 2> /dev/null)"
+    git_branch="$(git branch | cut -f 2 -d ' ')"
+
+    # Set color based on clean/staged/dirty.
+    if [[ ${git_status} =~ "working tree clean" ]]; then
+      state="${GREEN}"
+    elif [[ ${git_status} =~ "Changes to be committed" ]]; then
+      state="${YELLOW}"
+    else
+      state="${RED}"
+    fi
+
+    # Set arrow icon based on status against remote.
+    remote=''
+    if [[ ${git_status} =~ "Your branch is "(.*)" of" ]]; then
+      if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
+        remote+=" ↑"
+      else
+        remote+=" ↓"
+      fi
+    fi
+    if [[ ${git_status} =~ "Your branch and "(.*)" have diverged" ]]; then
+      remote+=" ↕"
+    fi
+
+    echo " ${state}(${git_branch})${remote}${RESET}"
   else
-    state="${RED}"
+    echo ""
   fi
-
-  GITINFO=" ${state}(${git_branch})${RESET}"
 }
 
 function virtualenv_info () {
-  test $VIRTUAL_ENV && echo "(`basename $VIRTUAL_ENV`) "
+  [[ -n $VIRTUAL_ENV ]] && echo "($(basename $VIRTUAL_ENV)) "
 }
 
 function set_prompt () {
-  if [[ -d .git ]]; then
-    set_git_status
-  else
-    GITINFO=''
-  fi
-  PS1="`virtualenv_info`${CYAN}\W${GITINFO} \$ ${RESET}"
+  PS1="$(virtualenv_info)${CYAN}\W \$$(git_info) ${RESET}"
 }
 
 PROMPT_COMMAND=set_prompt
