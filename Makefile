@@ -1,13 +1,15 @@
 DOTS=\
 bin \
-.bash_prompt \
 .bash_profile \
+.bashrc \
+.profile \
+.prompt \
 .config/bspwm \
-.config/compton.conf \
 .config/dunst \
 .config/gtk-3.0 \
 .config/sxhkd \
 .config/termite \
+.config/compton.conf \
 .emacs.d \
 .gitconfig \
 .tmux.conf \
