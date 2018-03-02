@@ -24,7 +24,11 @@ shift + alt + Return
 
 # program launcher
 alt + p
-	rofi -show run
+	rofi -show drun
+
+# bookmark launcher
+alt + b
+	rofi -show bookmark
 
 # make sxhkd reload its configuration files:
 alt + Escape
