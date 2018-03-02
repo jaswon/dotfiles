@@ -12,7 +12,8 @@ function git_info () {
   if git rev-parse --git-dir > /dev/null 2>&1; then
 
     git_status="$(git status 2> /dev/null)"
-    git_branch="$(git branch | cut -f 2 -d ' ')"
+    # git_branch="$(git branch | cut -f 2 -d ' ')"
+    git_branch="$(git rev-parse --abbrev-ref HEAD)"
 
     # Set color based on clean/staged/dirty.
     if [[ ${git_status} =~ "working tree clean" ]]; then
