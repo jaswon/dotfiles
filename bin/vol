@@ -6,7 +6,7 @@ case $1 in
     pactl set-sink-volume 0 +10%
   	;;
   d)
-    pactl set-sink-mute 0 1
+    pactl set-sink-mute 0 0
     pactl set-sink-volume 0 -10%
   	;;
   m)
