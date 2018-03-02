@@ -1,2 +1,3 @@
 !! rofi
 rofi.font: Inconsolata 13
+rofi.modi: drun,bookmark:~/bin/rofi-bookmark.sh
