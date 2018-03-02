@@ -113,8 +113,8 @@ highlight ColorColumn ctermbg=black
 set colorcolumn=80
 
 " clipboard
-map <Leader>c "*y
-map <S-Insert> <C-r>"
+map <Leader>c :w !xsel -i -b<CR>
+map <Leader>v :r !xsel -o -b<CR>
 
 " exit insert mode
 inoremap jj <esc>
