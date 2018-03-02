@@ -18,12 +18,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
 Plug 'honza/vim-snippets'
-Plug 'lervag/vimtex'
 Plug 'godlygeek/tabular'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+
+Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'vimwiki/vimwiki'
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 
 call plug#end()
 
