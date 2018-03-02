@@ -13,4 +13,6 @@ dropbox &
 
 feh --bg-fill ~/dotfiles/assets/wal/lash.png
 
+ibus-daemon -drx
+
 exec bspwm
