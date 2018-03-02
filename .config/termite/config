@@ -3,40 +3,47 @@ font = Inconsolata 14px
 
 [colors]
 
-# special
-foreground      = #ffffff
-foreground_bold = #ffffff
-cursor          =
-background      = #000000
+foreground      = #f8f8f2
+foreground_bold = #f5f4f1
+cursor          = #f5f4f1
+background      = #272822
 
-# black
-color0  = #000000
-color8  = #5c6370
+# 16 color space
 
-# red
-color1  = #e06c75
-color9  = #be5046
+# Black, Gray, Silver, White
+color0  = #272822
+color8  = #75715e
+color7  = #f8f8f2
+color15 = #f9f8f5
 
-# green
-color2  = #98c379
-color10 = #7a9f60
+# Red
+color1  = #f92672
+color9  = #f92672
 
-# yellow
-color3  = #e5c07b
-color11 = #d19a66
+# Green
+color2  = #a6e22e
+color10 = #a6e22e
 
-# blue
-color4  = #61afef
-color12 = #3b84c0
+# Yellow
+color3  = #f4bf75
+color11 = #f4bf75
 
-# magenta
-color5  = #c678dd
-color13 = #9a52af
+# Blue
+color4  = #66d9ef
+color12 = #66d9ef
 
-# cyan
-color6  = #56b6c2
-color14 = #3c909b
+# Purple
+color5  = #ae81ff
+color13 = #ae81ff
 
-# white
-color7  = #ffffff
-color15 = #828997
+# Teal
+color6  = #a1efe4
+color14 = #a1efe4
+
+# Extra colors
+color16 = #fd971f
+color17 = #cc6633
+color18 = #383830
+color19 = #49483e
+color20 = #a59f85
+color21 = #f5f4f1
