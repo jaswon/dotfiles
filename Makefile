@@ -8,6 +8,7 @@ bin \
 .config/dunst \
 .config/gtk-3.0 \
 .config/sxhkd \
+.config/rofi \
 .config/termite \
 .config/compton.conf \
 .emacs.d \
