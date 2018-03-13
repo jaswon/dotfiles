@@ -9,5 +9,8 @@ alias e='$EDITOR'
 alias z='zathura'
 alias math='python -ic "from math import *"'
 
+# functions
+cd () { builtin cd "$@" && ls; }
+
 # prompt
 . ~/.prompt
