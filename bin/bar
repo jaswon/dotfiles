@@ -38,7 +38,7 @@ battery_perc () { printf 'BATTPERC%s\n' "$(cat /sys/class/power_supply/BAT0/capa
 while true; do
   clock
   battery_perc
-  sleep 1m
+  sleep 1
 done > $BAR_FIFO &
 
 while true; do
