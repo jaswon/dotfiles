@@ -11,8 +11,8 @@ XF86Audio{Mute,LowerVolume,RaiseVolume}
   vol {m,d,u}
 
 # media controls
-# XF86Audio{Prev,Play,Next}
-#   playerctl {previous,play-pause,next}
+XF86Audio{Prev,Play,Next}
+  playerctl {previous,play-pause,next}
 
 # screenshot
 {_,alt + }Print
