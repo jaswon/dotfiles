@@ -19,7 +19,7 @@ bspc config external_rules_command "$HOME/.config/bspwm/ext_rules"
 
 bspc rule -a Gimp state=floating follow=on
 bspc rule -a Zathura state=tiled
-bspc rule -a Chromium desktop='^2'
+bspc rule -a Firefox desktop='^2'
 # bspc rule -a Chromium:player.spotify.com desktop='^4' follow=on
 bspc rule -a Spotify desktop='^4' follow=on
 bspc rule -a Xournal desktop='^3' follow=on
