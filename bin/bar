@@ -1,6 +1,6 @@
 #!/bin/sh
 
-INTERFACE="wlp1s0"
+INTERFACE="wlan0"
 
 [[ -e $BAR_FIFO ]] && rm $BAR_FIFO
 mkfifo $BAR_FIFO
