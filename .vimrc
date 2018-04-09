@@ -27,6 +27,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'vimwiki/vimwiki'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
 
 call plug#end()
 
