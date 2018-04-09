@@ -105,6 +105,7 @@ set timeoutlen=500
 set showcmd " show partial command in status 
 set background=dark
 set showmatch
+set backupcopy=yes
 
 " cursorline
 highlight CursorLine cterm=NONE ctermbg=black
