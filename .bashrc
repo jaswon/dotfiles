@@ -6,6 +6,7 @@ alias lal='ls -Alh'
 alias pls='sudo $(fc -ln -1)'
 alias http='python3 -m http.server'
 alias e='$EDITOR'
+alias se='sudoedit'
 alias z='zathura'
 alias math='python -ic "from math import *"'
 
