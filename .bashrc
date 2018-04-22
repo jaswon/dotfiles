@@ -10,6 +10,9 @@ alias se='sudoedit'
 alias z='zathura'
 alias math='python -ic "from math import *"'
 
+# disable xon/xoff
+stty -ixon
+
 # functions
 cd () { builtin cd "$@" && ls; }
 
