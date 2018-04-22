@@ -1,4 +1,4 @@
-" set leader, disable substitute
+" set leader, disable substitute 
 let mapleader = "s"
 map s <nop>
 
@@ -94,7 +94,7 @@ au Filetype markdown setl ts=4 sts=4 sw=4 et
 
 set path+=**
 set wildmenu
-set number relativenumber
+set number norelativenumber
 set incsearch showmatch hlsearch
 set splitbelow splitright
 set ignorecase smartcase
