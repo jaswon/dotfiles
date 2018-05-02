@@ -1,5 +1,0 @@
-#!/bin/bash
-
-dunstify "restarting wifi..." -t 1000
-sudo dhcpcd -k
-sudo dhcpcd -n
