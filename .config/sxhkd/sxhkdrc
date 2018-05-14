@@ -30,6 +30,11 @@ alt + p
 alt + b
 	rofi -show bookmark
 
+alt + n
+  id=$(cat /tmp/scratchid);\
+  bspc node $id -g hidden;\ 
+  bspc node $id -f
+
 # make sxhkd reload its configuration files:
 alt + Escape
 	pkill -USR1 -x sxhkd
