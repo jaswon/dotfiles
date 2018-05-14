@@ -11,7 +11,6 @@ bin \
 .config/rofi \
 .config/termite \
 .config/compton.conf \
-.emacs.d \
 .gitconfig \
 .tmux.conf \
 .vim \
