@@ -88,7 +88,7 @@ au Filetype markdown setl ts=4 sts=4 sw=4 et
 set path+=**
 set wildmenu
 set number norelativenumber
-set incsearch showmatch hlsearch
+set incsearch showmatch
 set splitbelow splitright
 set ignorecase smartcase
 set gdefault
@@ -116,8 +116,6 @@ map <Leader>v :r !xsel -o -b<CR>
 inoremap jk <esc>
 inoremap <esc> <nop>
 
-" clear search
-nnoremap <silent> <leader><space> :nohl<CR>
 " placeholder navigation - go to next <++>
 inoremap <space><tab> <esc>/<++><cr>"_c4l
 nnoremap <space><tab> /<++><cr>"_c4l
