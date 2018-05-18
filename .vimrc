@@ -132,3 +132,7 @@ inoremap <left> <nop>
 
 " write as sudo
 " cmap w!! w !sudo tee > /dev/null %
+
+" new file templates
+au BufNewFile *.tex :-1read $HOME/.vim/templates/tex
+au BufNewFile *.html :-1read $HOME/.vim/templates/html

@@ -1,0 +1,16 @@
+\documentclass[11pt]{article}
+
+\usepackage{physics}
+\usepackage{enumitem}
+\usepackage{parskip}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+\author{<++>}
+\title{<++>}
+\date{<++>}
+\maketitle
+
+<++>
+
+\end{document}
