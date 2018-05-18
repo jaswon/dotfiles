@@ -118,6 +118,9 @@ inoremap <esc> <nop>
 
 " clear search
 nnoremap <silent> <leader><space> :nohl<CR>
+" placeholder navigation - go to next <++>
+inoremap <space><tab> <esc>/<++><cr>"_c4l
+nnoremap <space><tab> /<++><cr>"_c4l
 
 " tab complete
 " imap <Tab> <c-p>
