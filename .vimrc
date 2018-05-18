@@ -120,15 +120,6 @@ inoremap <esc> <nop>
 inoremap <space><tab> <esc>/<++><cr>"_c4l
 nnoremap <space><tab> /<++><cr>"_c4l
 
-" tab complete
-" imap <Tab> <c-p>
-
-" split nav
-" nnoremap <c-h> <c-w>h
-" nnoremap <c-j> <c-w>j
-" nnoremap <c-k> <c-w>k
-" nnoremap <c-l> <c-w>l
-
 " disable arrow keys
 noremap <right> <nop>
 noremap <up> <nop>
