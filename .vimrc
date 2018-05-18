@@ -113,7 +113,7 @@ map <Leader>c :w !xsel -i -b<CR>
 map <Leader>v :r !xsel -o -b<CR>
 
 " exit insert mode
-inoremap jj <esc>
+inoremap jk <esc>
 inoremap <esc> <nop>
 
 " clear search
