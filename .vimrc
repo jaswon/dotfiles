@@ -15,16 +15,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
-Plug 'SirVer/ultisnips'
 Plug 'easymotion/vim-easymotion'
-Plug 'honza/vim-snippets'
 Plug 'godlygeek/tabular'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'vimwiki/vimwiki'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
@@ -34,10 +31,6 @@ call plug#end()
 " NerdTree
 let NERDTreeQuitOnOpen = 1
 map <C-n> :NERDTreeToggle<CR>
-
-" Vimwiki
-let g:vimwiki_list = [ { 'path': '~/Dropbox/personal/wiki/', 'path_html': '~/Dropbox/personal/wiki/html/' } ]
-let g:vimwiki_dir_link = 'index'
 
 " Syntastic
 set statusline+=%#warningmsg#
