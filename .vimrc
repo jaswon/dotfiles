@@ -20,23 +20,39 @@ Plug 'godlygeek/tabular'
 Plug 'vim-syntastic/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 call plug#end()
+
+" Ag
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  let g:ctrlp_use_caching = 1
+
+	command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+	nnoremap \ :Ag<space>
+end
+
+" Commentary - note: <c-_> is ctrl+slash
+nmap <c-_> <Plug>CommentaryLine
+vmap <c-_> <Plug>Commentary
 
 " NerdTree
 let NERDTreeQuitOnOpen = 1
 map <C-n> :NERDTreeToggle<CR>
 
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -75,7 +91,7 @@ filetype plugin indent on
 function! TabSetup ()
   set tabstop=2
   set softtabstop=0
-  set expandtab
+  set noexpandtab
   set shiftwidth=2
   set autoindent
 endfunction
@@ -84,6 +100,9 @@ call TabSetup()
 
 " tabbing for Markdown
 au Filetype markdown setl ts=4 sts=4 sw=4 et
+
+" tabbing for jsx
+au Filetype javascript.jsx setl et
 
 set path+=**
 set wildmenu
@@ -100,14 +119,17 @@ set showcmd " show partial command in status
 set background=dark
 set showmatch
 set backupcopy=yes
+set statusline=[%n]\ %F
+set laststatus=2
+set mouse=a
 
-" cursorline
-highlight CursorLine cterm=NONE ctermbg=black
-set cursorline
-
-" 80 char
-highlight ColorColumn ctermbg=black
-set colorcolumn=80
+" cursorline for current pane only
+highlight CursorLine cterm=NONE ctermbg=8
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 " clipboard
 map <Leader>c :w !xsel -i -b<CR>
@@ -115,6 +137,7 @@ map <Leader>v :r !xsel -o -b<CR>
 
 " exit insert mode
 inoremap jk <esc>
+inoremap kj <esc>
 inoremap <esc> <nop>
 
 " placeholder navigation - go to next <++>
