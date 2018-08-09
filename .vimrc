@@ -1,4 +1,4 @@
-" set leader, disable substitute 
+" set leader, disable substitute
 let mapleader = "s"
 map s <nop>
 
@@ -13,58 +13,82 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
-Plug 'vim-syntastic/syntastic'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'jremmen/vim-ripgrep'
+Plug 'w0rp/ale'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'spolu/dwm.vim'
 
+Plug 'autozimu/LanguageClient-neovim', { 'branch':'next', 'do': 'bash install.sh' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
+Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript.jsx'] }
 
 call plug#end()
 
-" Ag
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+" vim-js
+let g:javascript_plugin_flow = 1
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" fzf
 
-  let g:ctrlp_use_caching = 1
+function! s:open_dwm(file)
+	if exists("*DWM_New")
+		call DWM_New()
+	endif
+	exe "edit" a:file[0]
+endfunction
+let g:fzf_action = {
+\ 'ctrl-n': function('s:open_dwm'),
+\ 'enter': 'edit' }
 
-	command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-	nnoremap \ :Ag<space>
-end
+function! s:find_git_root()
+  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+  return v:shell_error ? '' : root
+endfunction
+
+command! -bang -nargs=* ProjectFiles call fzf#run(fzf#wrap({
+\ 'source':  'rg --files',
+\ 'dir':     s:find_git_root(),
+\ 'options': '--color=dark,hl:46,hl+:46 --prompt "ProjectFiles> "'
+\}))
+nnoremap <c-p> :ProjectFiles<cr>
+nnoremap \ :Rg<space>
+
+" LSP
+set hidden
+let g:LanguageClient_serverCommands = {
+\ "javascript.jsx": [ 'flow-language-server', '--stdio', '--try-flow-bin' ],
+\ "go": [ 'go-langserver' ],
+\}
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+
+" ALE
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\ "javascript": ['flow'],
+\ "go": ['gofmt', 'go build'],
+\}
+let g:ale_fixers = {
+\ "javascript": ['prettier'],
+\ "scss": ['prettier'],
+\ "go": ['gofmt'],
+\}
+
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 1
+let g:ale_javascript_prettier_use_local_config = 1
 
 " Commentary - note: <c-_> is ctrl+slash
 nmap <c-_> <Plug>CommentaryLine
 vmap <c-_> <Plug>Commentary
-
-" NerdTree
-let NERDTreeQuitOnOpen = 1
-map <C-n> :NERDTreeToggle<CR>
-
-" Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_quiet_messages = { "level": "warnings" }
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsSnippetsDir="~/.vim/bundle/vim-snippets/UltiSnips"
 
 " EasyMotion
 let g:EasyMotion_do_mapping = 0
@@ -79,6 +103,9 @@ map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
+
+" Emmet
+let g:user_emmet_leader_key='<c-l>'
 
 " latex stuff
 let g:tex_flavor = "latex"
@@ -102,7 +129,10 @@ call TabSetup()
 au Filetype markdown setl ts=4 sts=4 sw=4 et
 
 " tabbing for jsx
-au Filetype javascript.jsx setl et
+au Filetype javascript.jsx setl et sw=4 ts=4
+
+" tabbing for sass
+au Filetype scss setl et sw=4 ts=4
 
 set path+=**
 set wildmenu
@@ -114,13 +144,12 @@ set ignorecase smartcase
 set gdefault
 set backspace=indent,eol,start
 set autowrite " write when make
-set timeoutlen=500
-set showcmd " show partial command in status 
+set timeoutlen=150
+set showcmd " show partial command in status
 set background=dark
-set showmatch
 set backupcopy=yes
-set statusline=[%n]\ %F
-set laststatus=2
+set statusline=[%n]\ %F "buffer number and filename
+set laststatus=2 " always show statusline
 set mouse=a
 
 " cursorline for current pane only
@@ -131,9 +160,12 @@ augroup CursorLine
     au WinLeave * setlocal nocursorline
 augroup END
 
-" clipboard
-map <Leader>c :w !xsel -i -b<CR>
-map <Leader>v :r !xsel -o -b<CR>
+" clear highlight
+noremap <leader><space> :nohl<cr>
+
+" trailing whitespace
+set list listchars=tab:\ \ ,trail:¬
+hi Whitespace ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
 
 " exit insert mode
 inoremap jk <esc>
@@ -153,9 +185,6 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
-
-" write as sudo
-" cmap w!! w !sudo tee > /dev/null %
 
 " new file templates
 au BufNewFile *.tex :-1read $HOME/.vim/templates/tex

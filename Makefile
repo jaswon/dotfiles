@@ -7,6 +7,7 @@ bin \
 .config/bspwm \
 .config/dunst \
 .config/gtk-3.0 \
+.config/nvim \
 .config/sxhkd \
 .config/rofi \
 .config/termite \
