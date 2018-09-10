@@ -26,7 +26,7 @@ Plug 'spolu/dwm.vim'
 
 Plug 'autozimu/LanguageClient-neovim', { 'branch':'next', 'do': 'bash install.sh' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html', 'xml' ] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript.jsx'] }
 
@@ -105,7 +105,7 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
 " Emmet
-let g:user_emmet_leader_key='<c-l>'
+imap ;; <plug>(emmet-expand-abbr)
 
 " latex stuff
 let g:tex_flavor = "latex"
