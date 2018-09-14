@@ -1,18 +1,18 @@
 #!/bin/sh
 
-export BAR_FIFO=/tmp/bar.fifo
-
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
+xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
-compton --config ~/.config/compton.conf -b 
-dunst &
-dropbox &
+# systray
+exec pamac-tray &
+exec volumeicon &
+exec nm-applet &
+exec slstatus &
 
-feh --bg-fill ~/dotfiles/assets/wal/lash.png
+# open term by default
+exec termite &
 
-ibus-daemon -drx
-
-exec bspwm
+exec dwm
