@@ -4,22 +4,16 @@ bin \
 .bashrc \
 .profile \
 .prompt \
-.config/bspwm \
-.config/dunst \
 .config/gtk-3.0 \
 .config/nvim \
-.config/sxhkd \
 .config/rofi \
 .config/termite \
-.config/compton.conf \
 .gitconfig \
-.tmux.conf \
 .vim \
 .vimrc \
 .xinitrc \
 .Xmodmap \
-.Xresources
- 
+
 install: clean update deploy
 
 list: ## show dots in this repo

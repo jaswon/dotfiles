@@ -1,4 +1,0 @@
-!! rofi
-rofi.font: Inconsolata 13
-rofi.theme: config
-rofi.modi: drun,bookmark:~/bin/rofi-bookmark.sh

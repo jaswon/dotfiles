@@ -1,5 +1,0 @@
-#!/bin/sh
-
-if [ "$2" = "" ]; then
-  echo "state=floating"
-fi
