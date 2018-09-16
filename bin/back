@@ -1,0 +1,21 @@
+#!/bin/sh
+
+DIRS=(
+	~/code/ctf
+)
+
+if ( ! ping -c 1 $2 &> /dev/null ) then # exit if invalid remote
+	echo can\'t reach: $2
+	exit 1
+fi
+
+remote=${3:-root}@$2
+
+case $1 in
+	up) rsync -avuzR ${DIRS[@]} $remote:backup ;;
+	down) rsync -avuz $remote:backup/ / ;;
+	*)
+		echo "usage: back [up|down] remote [user]"
+		exit 1
+	;;	
+esac
