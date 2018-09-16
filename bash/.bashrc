@@ -14,7 +14,7 @@ alias math='python -ic "from math import *"'
 bind TAB:complete
 
 # virtualenvs
-alias ctf='cd ~/dev/ctf && source ~/env/ctf/bin/activate'
+alias ctf='cd ~/code/ctf && source ~/env/ctf/bin/activate'
 
 # disable xon/xoff
 stty -ixon
