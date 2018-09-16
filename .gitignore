@@ -1,10 +1,5 @@
 *.swp
-.emacs.d/elpa/*
-.emacs.d/ido.last
-.emacs.d/eshell/*
-.emacs.d/auto-save-list/*
-.emacs.d/network-security.data
-.vim/spell
-.vim/.netrwhist
-.vim/plugged
-.vim/autoload/plug.vim
+vim/.vim/spell
+vim/.vim/.netrwhist
+vim/.vim/plugged
+vim/.vim/autoload/plug.vim
