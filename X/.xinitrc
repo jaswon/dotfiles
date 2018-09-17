@@ -10,11 +10,8 @@ xset s off -dpms # prevent screen blanking
 
 exec compton &
 
-# systray
-exec pamac-tray &
-exec volumeicon &
-exec nm-applet &
-exec slstatus &
+# bar
+env LANG=en_US.UTF-8 ~/bin/bar &
 
 # open term by default
 exec termite &
