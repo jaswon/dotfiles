@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
 # aliases
 alias ls='ls --color --group-directories-first'
 alias la='ls -A'
@@ -20,7 +23,7 @@ alias ctf='cd ~/code/ctf && source ~/env/ctf/bin/activate'
 stty -ixon
 
 # functions
-cd () { builtin cd "$@" && ls; }
+cd () { builtin cd "$@" && ls -A; }
 
 # prompt
 . ~/.prompt

@@ -6,6 +6,8 @@
 xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
+exec compton &
+
 # systray
 exec pamac-tray &
 exec volumeicon &
