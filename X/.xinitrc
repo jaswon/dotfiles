@@ -3,6 +3,8 @@
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 [[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
 
+xinput set-prop 14 286 1 # tap to click
+
 xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
