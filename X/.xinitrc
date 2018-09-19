@@ -11,7 +11,12 @@ xset s off -dpms # prevent screen blanking
 exec compton &
 
 # bar
-exec bar &
+while :; do
+	DATE=$(date '+(%^a) %b %_d, %Y %I:%M %p')
+	BAT=$(cat /sys/class/power_supply/BAT0/capacity)
+	xsetroot -name " [ $BAT ] [ $DATE ] "
+	sleep 1m
+done &
 
 # open term by default
 exec termite &
