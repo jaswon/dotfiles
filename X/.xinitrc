@@ -11,7 +11,7 @@ xset s off -dpms # prevent screen blanking
 exec compton &
 
 # bar
-env LANG=en_US.UTF-8 ~/bin/bar &
+exec bar &
 
 # open term by default
 exec termite &

@@ -1,85 +1,10 @@
 #!/bin/sh
 
-BAR_FIFO=/tmp/bar
-
-INTERFACE="wlp1s0"
 BAT=/sys/class/power_supply/BAT0
 
-# initialize bar fifo
-[[ -e $BAR_FIFO ]] && rm $BAR_FIFO
-mkfifo $BAR_FIFO
-
-# window title
-xtitle -st 50 -f "TITLE%s\n" > $BAR_FIFO &
-
-# datetime
 while :; do
-	date '+TIME(%^a) %b %_d, %Y %I:%M %p'
+	DATE=$(date '+(%^a) %b %_d, %Y %I:%M %p')
+	BAT=$(cat $BAT/capacity)
+	xsetroot -name " [ $BAT ] [ $DATE ] "	
 	sleep 60
-done > $BAR_FIFO &
-
-# battery status
-while :; do
-	case $(cat $BAT/status) in
-		'Full') barbattsym='\ue214' ;;
-		'Discharging') barbattsym='\ue213' ;;
-		'Charging') barbattsym='\ue215' ;;
-		*) barbattsym='\ue211' ;;
-	esac
-	echo -e "BATTSTATE$barbattsym"
-	sleep 1
-done > $BAR_FIFO &
-
-# battery capacity
-while :; do
-	echo "BATTPERC$(cat $BAT/capacity)"
-	sleep 30
-done > $BAR_FIFO &
-
-# wifi status
-while :; do
-	case $(nmcli -t -f general.state dev show $INTERFACE 2>/dev/null | sed 's/.*(\(.*\))/\1/') in
-		"connect"*) WIFI_STATUS='#0f0' ;;
-		"disconnect"*) WIFI_STATUS='#f00' ;;
-		*) WIFI_STATUS='#fa0' ;;
-	esac
-	printf "WIFI%%{U%s}%%{+u}%s%%{-u}\n" \
-		$WIFI_STATUS \
-		$(nmcli -t -f active,ssid dev wifi list | grep '^yes:' | cut -d: -f2)
-	sleep 5
-done > $BAR_FIFO &
-
-# volume () {
-#   local VOLUME=$(amixer sget Master | grep % | sed 's/%.*//;s/.*\[//')
-#   local MUTED=$(amixer sget Master | grep % | sed 's/.*\[//;s/\]//' | grep off)
-#   local VOL_SYM=
-#   if [[ -n $MUTED ]]; then
-#     VOL_SYM='\U00e202'
-#   else
-#     VOL_SYM='\U00e203'
-#   fi
-#   echo -e "VOL$VOL_SYM $VOLUME"
-# }
-
-# while inotifywait -qe access /dev/snd/controlC0; do volume done > $BAR_FIFO &
-
-font1='Misc Tamsyn:size=10'
-font2='Wuncon Siji:size=10'
-
-while read -r barinfo; do
-  case $barinfo in
-    "TIME"*) bartime=${barinfo#TIME} ;;
-    "WIFI"*) barwifi=${barinfo#WIFI} ;;
-    "VOL"*) barvol=${barinfo#VOL} ;;
-    "BATT"*) 
-      case ${barinfo#BATT} in
-        "STATE"*) barbattstate=${barinfo#BATTSTATE} ;;
-        "PERC"*) barbattperc=${barinfo#BATTPERC} ;;
-      esac ;;
-    "TITLE"*) title=${barinfo#TITLE} ;;
-  esac
-  echo -e "%{l} $title%{r}[ $barwifi ] [ $barbattstate$barbattperc ] [ $bartime ] "
-done < $BAR_FIFO | lemonbar -d -u 2 -B#333 -gx28+215 -f "$font1" -f "$font2"| bash &
-
-# trap 'kill $(jobs -p)' EXIT SIGTERM SIGINT QUIT
-wait
+done
