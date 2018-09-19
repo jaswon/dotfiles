@@ -1,0 +1,18 @@
+#!/bin/sh
+
+seg=10
+
+dir=/sys/class/backlight/intel_backlight
+cur=$(cat $dir/brightness)
+max=$(cat $dir/max_brightness)
+
+curf=$(( (cur+1)*seg/max ))
+
+case $1 in
+	+|-) newf=$(seq 1 $seg | grep ^$(( curf $1 1 ))$ ) ;;
+esac
+
+newf=${newf:-$curf}
+new=$(( newf*max/seg ))
+
+echo $new | sudo tee $dir/brightness >/dev/null
