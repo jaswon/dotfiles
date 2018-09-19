@@ -8,6 +8,7 @@ xinput set-prop 14 286 1 # tap to click
 xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
+hsetroot -solid "#627b80"
 exec compton &
 
 # bar
