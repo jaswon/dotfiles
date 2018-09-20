@@ -35,5 +35,5 @@ base () {
 		"NOTI_DONE") NOTI="" ;;
 		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
 	esac
-	xsetroot -name "${NOTI}${BASE}" &> /dev/null
+	xsetroot -name "$NOTI$BASE" &> /dev/null
 done

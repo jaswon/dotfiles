@@ -19,11 +19,9 @@ new=$(( newf*max/seg ))
 # user ALL=NOPASSWD: /usr/bin/tee /sys/class/backlight/intel_backlight/brightness
 echo $new | sudo tee $dir/brightness >/dev/null
 
-padf=$(( seg - newf ))
-
-ICON=$(echo -e '\ue26e')
+icon=$(echo -e '\ue26e')
 
 volbar=$(yes '-' | head -n$newf | tr -d "\n")
-padbar=$(yes ' ' | head -n$padf | tr -d "\n")
+padbar=$(yes ' ' | head -n$(( seg - newf )) | tr -d "\n")
 
-noti "$ICON$volbar$padbar"
+noti "$icon$volbar$padbar"
