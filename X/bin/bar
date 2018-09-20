@@ -14,7 +14,7 @@ noti () {
 		# if previous dismiss timer exists, stop it
 		[[ "$EXITPID" ]] && kill $EXITPID
 		# set new dismiss timer
-		sleep 2 && echo NOTI_DONE && EXITPID= &
+		sleep 1 && echo NOTI_DONE && EXITPID= &
 		EXITPID=$!
 		echo "NOTI$REPLY"
 	done < $NOTI_FIFO
