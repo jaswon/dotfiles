@@ -1,0 +1,39 @@
+#!/bin/bash
+
+NOTI_FIFO=/tmp/noti
+
+# return if bar is already running
+[[ "$(pidof -x $(basename $0) -o %PPID)" ]] && return
+
+noti () {
+	# keep fifo open
+	tail -f /dev/null > $NOTI_FIFO &
+	EXITPID=
+	# read from fifo
+	while read -r; do
+		# if previous dismiss timer exists, stop it
+		[[ "$EXITPID" ]] && kill $EXITPID
+		# set new dismiss timer
+		sleep 2 && echo NOTI_DONE && EXITPID= &
+		EXITPID=$!
+		echo "NOTI$REPLY"
+	done < $NOTI_FIFO
+}
+
+base () {
+	while :; do
+		DATE=$(date '+(%^a) %b %_d, %Y %I:%M %p')
+		BAT=$(cat /sys/class/power_supply/BAT0/capacity)
+		echo "BASE [ $BAT ] [ $DATE ] "
+		sleep 5
+	done
+}
+
+( base & noti ) | while read -r; do
+	case $REPLY in
+		"BASE"*) BASE="${REPLY#BASE}" ;;
+		"NOTI_DONE") NOTI="" ;;
+		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
+	esac
+	xsetroot -name "${NOTI}${BASE}" &> /dev/null
+done
