@@ -3,4 +3,4 @@
 # source noti fifo from bar
 source $(which bar)
 
-echo $1 > $NOTI_FIFO
+echo "$1" > $NOTI_FIFO

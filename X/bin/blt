@@ -16,3 +16,12 @@ newf=${newf:-$curf}
 new=$(( newf*max/seg ))
 
 echo $new | sudo tee $dir/brightness >/dev/null
+
+padf=$(( seg - newf ))
+
+ICON=$(echo -e '\ue26e')
+
+volbar=$(yes '-' | head -n$newf | tr -d "\n")
+padbar=$(yes ' ' | head -n$padf | tr -d "\n")
+
+noti "$ICON$volbar$padbar"
