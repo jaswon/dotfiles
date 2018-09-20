@@ -15,6 +15,8 @@ esac
 newf=${newf:-$curf}
 new=$(( newf*max/seg ))
 
+# sudoers:
+# user ALL=NOPASSWD: /usr/bin/tee /sys/class/backlight/intel_backlight/brightness
 echo $new | sudo tee $dir/brightness >/dev/null
 
 padf=$(( seg - newf ))
