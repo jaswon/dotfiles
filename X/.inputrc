@@ -1,2 +1,6 @@
 # disable console beep
 set bell-style none
+
+# ctrl + left,right
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
