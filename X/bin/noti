@@ -3,6 +3,8 @@
 # source noti fifo from bar
 source $(which bar)
 
+# specify duration of notification
+# (default: 1 second) with -t flag
 duration=1
 while getopts ":t:" opt; do
 	case $opt in

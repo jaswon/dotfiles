@@ -6,6 +6,7 @@ case $1 in
   %) amixer -q set Master toggle ;;
 esac
 
+# draw bar to noti
 amixer sget Master | tail -n1 | sed 's/^.*\[\(.*\)%\] \[.*\] \[\(.*\)\]$/\1 \2/' | {
 	read vol mute
 	case $mute in

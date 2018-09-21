@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# number of segments in bar representation
 seg=10
 
 dir=/sys/class/backlight/intel_backlight
@@ -19,8 +20,9 @@ new=$(( newf*max/seg ))
 # user ALL=NOPASSWD: /usr/bin/tee /sys/class/backlight/intel_backlight/brightness
 echo $new | sudo tee $dir/brightness >/dev/null
 
-icon=$(echo -e '\ue26e')
 
+# draw bar to noti
+icon=$(echo -e '\ue26e')
 volbar=$(yes '-' | head -n$newf | tr -d "\n")
 padbar=$(yes ' ' | head -n$(( seg - newf )) | tr -d "\n")
 

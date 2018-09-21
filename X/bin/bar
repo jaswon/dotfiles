@@ -8,15 +8,13 @@ NOTI_FIFO=/tmp/noti
 # return if bar is already running
 [[ "$(pidof -x $(basename $0) -o %PPID)" ]] && return
 
-[[ -e $NOTI_FIFO ]] && rm $NOTI_FIFO
-mkfifo $NOTI_FIFO
+[[ -e $NOTI_FIFO ]] && rm $NOTI_FIFO # clean up previous fifo
+mkfifo $NOTI_FIFO # create new fifo
+tail -f /dev/null > $NOTI_FIFO & # keep fifo open
 
 noti () {
-	# keep fifo open
-	tail -f /dev/null > $NOTI_FIFO &
-	EXITPID=
-	# read from fifo
-	while read -r duration content; do
+	EXITPID= # pid of notification dismiss timer
+	while read -r duration content; do # read from fifo
 		# if previous dismiss timer exists, stop it
 		[[ "$EXITPID" ]] && kill $EXITPID
 		# set new dismiss timer
@@ -35,6 +33,7 @@ base () {
 	done
 }
 
+# checks for changes in wifi state
 WIFI_DOWN=$(echo -e '\ue217')
 WIFI_UP=$(echo -e '\ue21a')
 nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
