@@ -32,15 +32,6 @@ base () {
 	done
 }
 
-( base & noti ) | while read -r; do
-	case $REPLY in
-		"BASE"*) BASE="${REPLY#BASE}" ;;
-		"NOTI_DONE") NOTI="" ;;
-		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
-	esac
-	xsetroot -name "$NOTI$BASE" &> /dev/null
-done &
-
 WIFI_DOWN=$(echo -e '\ue217')
 WIFI_UP=$(echo -e '\ue21a')
 nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
@@ -51,4 +42,11 @@ while read -r; do
 	esac
 done > $NOTI_FIFO &
 
-wait
+( base & noti ) | while read -r; do
+	case $REPLY in
+		"BASE"*) BASE="${REPLY#BASE}" ;;
+		"NOTI_DONE") NOTI="" ;;
+		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
+	esac
+	xsetroot -name "$NOTI$BASE" &> /dev/null
+done
