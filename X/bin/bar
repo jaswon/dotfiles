@@ -8,6 +8,9 @@ NOTI_FIFO=/tmp/noti
 # return if bar is already running
 [[ "$(pidof -x $(basename $0) -o %PPID)" ]] && return
 
+[[ -e $NOTI_FIFO ]] && rm $NOTI_FIFO
+mkfifo $NOTI_FIFO
+
 noti () {
 	# keep fifo open
 	tail -f /dev/null > $NOTI_FIFO &
