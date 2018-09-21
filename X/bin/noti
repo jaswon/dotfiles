@@ -3,4 +3,14 @@
 # source noti fifo from bar
 source $(which bar)
 
-echo "$1" > $NOTI_FIFO
+duration=1
+while getopts ":t:" opt; do
+	case $opt in
+		t) duration=$OPTARG ;;
+	esac
+done
+shift $((OPTIND -1))
+
+[[ "$@" ]] || { echo "Invalid"; exit 1; }
+
+echo "$duration $@" > $NOTI_FIFO

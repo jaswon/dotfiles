@@ -13,13 +13,13 @@ noti () {
 	tail -f /dev/null > $NOTI_FIFO &
 	EXITPID=
 	# read from fifo
-	while read -r; do
+	while read -r duration content; do
 		# if previous dismiss timer exists, stop it
 		[[ "$EXITPID" ]] && kill $EXITPID
 		# set new dismiss timer
-		sleep 1 && echo NOTI_DONE && EXITPID= &
+		sleep $duration && echo NOTI_DONE && EXITPID= &
 		EXITPID=$!
-		echo "NOTI$REPLY"
+		echo "NOTI$content"
 	done < $NOTI_FIFO
 }
 
@@ -37,8 +37,8 @@ WIFI_UP=$(echo -e '\ue21a')
 nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
 while read -r; do
 	case $REPLY in
-		"'connected'") echo "$WIFI_UP$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)" ;;
-		"'disconnected'") echo "${WIFI_DOWN}Disconnected" ;;
+		"'connected'") echo "3 $WIFI_UP$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)" ;;
+		"'disconnected'") echo "3 ${WIFI_DOWN}Disconnected" ;;
 	esac
 done > $NOTI_FIFO &
 
