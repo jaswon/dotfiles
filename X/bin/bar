@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# this script acts as a single source of truth for
+# the notification pipe variable. source this script
+# to include in other scripts
 NOTI_FIFO=/tmp/noti
 
 # return if bar is already running
@@ -36,4 +39,16 @@ base () {
 		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
 	esac
 	xsetroot -name "$NOTI$BASE" &> /dev/null
-done
+done &
+
+WIFI_DOWN=$(echo -e '\ue217')
+WIFI_UP=$(echo -e '\ue21a')
+nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
+while read -r; do
+	case $REPLY in
+		"'connected'") echo "$WIFI_UP$(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)" ;;
+		"'disconnected'") echo "${WIFI_DOWN}Disconnected" ;;
+	esac
+done > $NOTI_FIFO &
+
+wait
