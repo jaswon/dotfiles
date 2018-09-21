@@ -24,4 +24,4 @@ icon=$(echo -e '\ue26e')
 volbar=$(yes '-' | head -n$newf | tr -d "\n")
 padbar=$(yes ' ' | head -n$(( seg - newf )) | tr -d "\n")
 
-noti "$icon$volbar$padbar"
+noti "[$icon$volbar$padbar ]"

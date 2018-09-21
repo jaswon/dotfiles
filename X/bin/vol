@@ -15,5 +15,5 @@ amixer sget Master | tail -n1 | sed 's/^.*\[\(.*\)%\] \[.*\] \[\(.*\)\]$/\1 \2/'
 	vol=$(( (vol + 5) / 10 ))
 	volbar=$(yes '-' | head -n$vol | tr -d "\n")
 	padbar=$(yes ' ' | head -n$(( 10 - vol )) | tr -d "\n")
-	noti "$icon$volbar$padbar"
+	noti "[$icon$volbar$padbar ]"
 }
