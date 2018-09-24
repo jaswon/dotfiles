@@ -1,29 +1,27 @@
 #!/bin/sh
 
 # number of segments in bar representation
-seg=10
+SEG=10
 
-dir=/sys/class/backlight/intel_backlight
-cur=$(cat $dir/brightness)
-max=$(cat $dir/max_brightness)
+DIR=/sys/class/backlight/intel_backlight
+CUR=$(cat $DIR/brightness)
+MAX=$(cat $DIR/max_brightness)
 
-curf=$(( (cur+1)*seg/max ))
+CURF=$(( (CUR+1)*SEG/MAX ))
 
 case $1 in
-	+|-) newf=$(seq 1 $seg | grep ^$(( curf $1 1 ))$ ) ;;
+	+|-) NEWF=$(seq $SEG | grep -x "$(( CURF $1 1 ))" ) ;;
 esac
-
-newf=${newf:-$curf}
-new=$(( newf*max/seg ))
+NEWF=${NEWF:-$CURF}
+NEW=$(( NEWF*MAX/SEG ))
 
 # sudoers:
 # user ALL=NOPASSWD: /usr/bin/tee /sys/class/backlight/intel_backlight/brightness
-echo $new | sudo tee $dir/brightness >/dev/null
+echo $NEW | sudo tee $DIR/brightness >/dev/null
 
 
 # draw bar to noti
-icon=$(echo -e '\ue26e')
-volbar=$(yes '─' | head -n$newf | tr -d "\n")
-padbar=$(yes ' ' | head -n$(( seg - newf )) | tr -d "\n")
-
-noti "[$icon$volbar$padbar ]"
+ICON=$(echo -e '\ue26e')
+VOLBAR=$( seq -s'-' 0 $NEWF | sed 's/[0-9]//g' )
+PADBAR=$( seq -s' ' 0 $(( SEG - NEWF )) | sed 's/[0-9]//g' )
+noti "[$ICON$VOLBAR$PADBAR ]"
