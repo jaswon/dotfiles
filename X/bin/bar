@@ -27,13 +27,20 @@ noti () {
 base () {
 	while :; do
 		DATE=$(date '+(%^a) %b %_d, %Y %I:%M %p')
-		BAT=$(cat /sys/class/power_supply/BAT0/capacity)
-		echo "BASE [ $BAT ] [ $DATE ] "
+		BAT_LVL=$(acpi -b | head -n1 | cut -d, -f2 | tail -c+2 )
+		BAT_STS=$(acpi -a | cut -d' ' -f3 | cut -d- -f1)
+		case $BAT_STS in
+			"on") ICON=$(echo -e '\ue041') ;;
+			"off") ICON=$(echo -e '\ue032') ;;
+		esac
+		echo "BASE [ $ICON$BAT_LVL ] [ $DATE ] "
 		sleep 5
 	done
 }
 
-# checks for changes in wifi state
+### MODULES ###
+
+# wifi state ( connected / disconnected )
 WIFI_DOWN=$(echo -e '\ue217')
 WIFI_UP=$(echo -e '\ue21a')
 nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
@@ -43,6 +50,9 @@ while read -r; do
 		"'disconnected'") echo "3 ${WIFI_DOWN}Disconnected" ;;
 	esac
 done > $NOTI_FIFO &
+
+# screenshot - TODO
+
 
 ( base & noti ) | while read -r; do
 	case $REPLY in
