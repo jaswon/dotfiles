@@ -1,20 +1,21 @@
 #!/bin/bash
 
 case $1 in
-  +) amixer -q set Master 10%+ unmute ;;
-  -) amixer -q set Master 10%- unmute ;;
-  %) amixer -q set Master toggle ;;
+	+) pamixer -ui 10 ;;
+	-) pamixer -ud 10 ;;
+	%) pamixer -t ;;
 esac
 
+VOL=$(pamixer --get-volume)
+MUT=$(pamixer --get-mute)
+
+VOLSEG=$(( ( VOL + 5 ) / 10 ))
+
 # draw bar to noti
-amixer sget Master | tail -n1 | sed 's/^.*\[\(.*\)%\] \[.*\] \[\(.*\)\]$/\1 \2/' | {
-	read vol mute
-	case $mute in
-		"on") icon=$(echo -e "\ue204") ;;
-		"off") icon=$(echo -e "\ue202") ;;
-	esac
-	vol=$(( (vol + 5) / 10 ))
-	volbar=$(yes '─' | head -n$vol | tr -d "\n")
-	padbar=$(yes ' ' | head -n$(( 10 - vol )) | tr -d "\n")
-	noti "[$icon$volbar$padbar ]"
-}
+case $MUT in
+	"false") ICON=$(echo -e "\ue204") ;;
+	"true") ICON=$(echo -e "\ue202") ;;
+esac
+VOLBAR=$( seq -s'-' 0 $VOLSEG | sed 's/[0-9]//g' )
+PADBAR=$( seq -s' ' 0 $(( 10 - VOLSEG )) | sed 's/[0-9]//g' )
+noti "[$ICON$VOLBAR$PADBAR ]"
