@@ -15,6 +15,6 @@ exec compton &
 bar &
 
 # open term by default
-exec termite &
+exec kitty &
 
 exec dwm
