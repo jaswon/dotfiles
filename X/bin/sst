@@ -1,0 +1,10 @@
+#!/bin/sh
+
+FP=~/tmp/$(date +%s).png
+
+case "$1" in
+	"s") maim -s $FP ;;
+	"") maim $FP ;;
+esac
+
+[ "$?" -ne 0 ] || noti "scrot saved!"
