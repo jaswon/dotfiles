@@ -33,7 +33,7 @@ base () {
 			"on") ICON=$(echo -e '\ue041') ;;
 			"off") ICON=$(echo -e '\ue032') ;;
 		esac
-		echo "BASE [ $ICON$BAT_LVL ] [ $DATE ] "
+		echo "BASE [ $ICON $BAT_LVL ] [ $DATE ] "
 		sleep 5
 	done
 }
