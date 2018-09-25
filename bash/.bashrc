@@ -23,7 +23,7 @@ alias ctf='cd ~/code/ctf && source ~/env/ctf/bin/activate'
 stty -ixon
 
 # functions
-cd () { builtin cd "$@" && ls -A; }
+cd () { builtin cd "$@" && ls; }
 
 # prompt
 . ~/.prompt
