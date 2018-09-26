@@ -1,4 +1,4 @@
-URxvt.font: xft:Inconsolata-12
+URxvt.font: xft:Inconsolata-12, xft:lucy tewi-12
 URxvt.internalBorder: 16
 URxvt.scrollBar: false
 
