@@ -153,7 +153,7 @@ set laststatus=2 " always show statusline
 set mouse=a
 
 " cursorline for current pane only
-highlight CursorLine cterm=NONE ctermbg=8
+highlight CursorLine cterm=NONE ctermbg=238 guibg=#444444
 augroup CursorLine
     au!
     au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
