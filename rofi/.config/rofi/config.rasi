@@ -4,11 +4,10 @@
 }
 
 window {
-	font: "lucy tewi 9";
+	font: "ypn envypn 13";
 	width: 20%;
-	location: north;
-	anchor: north;
-	y-offset: 30%;
+	location: center;
+	anchor: center;
 }
 
 mainbox {
@@ -27,7 +26,8 @@ textbox-colon {
 }
 
 listview {
-	fixed-height: false;
+	fixed-height: true;
+	lines: 8;
 }
 
 element {
