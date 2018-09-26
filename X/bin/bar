@@ -51,9 +51,6 @@ while read -r; do
 	esac
 done > $NOTI_FIFO &
 
-# screenshot - TODO
-
-
 ( base & noti ) | while read -r; do
 	case $REPLY in
 		"BASE"*) BASE="${REPLY#BASE}" ;;
