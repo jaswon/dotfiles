@@ -9,7 +9,7 @@ xinput set-prop 14 'libinput Accel Speed' 0.1 # mouse accel
 xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
-exec compton &
+compton -b
 
 # bar
 bar &
