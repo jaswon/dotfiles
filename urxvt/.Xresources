@@ -1,4 +1,4 @@
-URxvt.font: xft:ypn envypn:pixelsize=18
+URxvt.font: xft:Inconsolata-12
 URxvt.internalBorder: 16
 URxvt.scrollBar: False
 
