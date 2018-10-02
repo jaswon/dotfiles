@@ -15,6 +15,6 @@ compton -b
 bar &
 
 # open term by default
-exec urxvt &
+exec st &
 
 exec dwm
