@@ -4,7 +4,7 @@
 }
 
 window {
-	font: "ypn envypn 13";
+	font: "curie 12";
 	width: 20%;
 	location: center;
 	anchor: center;
