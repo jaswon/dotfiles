@@ -1,0 +1,6 @@
+#!/bin/sh
+
+LIST=$(nmcli -t --fields "SSID,SECURITY,SIGNAL" device wifi list |\
+	 sed -e 's/::/:Insecure:/' -e '/^:/d' | awk -F':' '!_[$1]++' | column -ts: )
+
+echo "$LIST" # | rofi -dmenu

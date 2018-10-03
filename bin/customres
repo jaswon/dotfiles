@@ -1,0 +1,16 @@
+#!/bin/sh
+
+display=$1
+
+modeline=$(cvt $2 $3 $4 | tail -n1 | cut -d' ' -f2-)
+modename=$(echo $modeline | cut -d' ' -f1)
+
+xrandr --newmode $modeline
+
+if [ $? -ne 0 ]; then
+	echo "failed to add new mode. it might already exist"
+	exit
+fi
+
+xrandr --addmode $1 $modename
+xrandr --output $1 --mode $modename
