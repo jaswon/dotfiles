@@ -1,0 +1,22 @@
+#!/bin/sh
+
+PID_FILE=/tmp/oc_pid
+
+case $1 in
+	up)
+		if [ -z $2 ]; then
+			echo "enter server address"
+			exit 1
+		fi
+		sudo openvpn --mktun --dev tun1
+		sudo ip link set tun1 up
+		sudo openconnect -b --pid-file=$PID_FILE -i tun1 $2
+		;;
+	down)
+		[ ! -e "$PID_FILE" ] && exit
+		sudo kill $(cat $PID_FILE) && sudo rm $PID_FILE
+		sudo ip link set tun1 down
+		sudo openvpn --rmtun --dev tun1
+		nmcli radio wifi off && nmcli radio wifi on
+		;;
+esac

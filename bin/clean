@@ -1,9 +1,0 @@
-#!/bin/sh
-
-device="ELAN0732:00 04F3:22E1"
-
-xsetwacom --set "$device" Touch off
-
-trap "xsetwacom --set \"$device\" Touch on; exit" EXIT INT TERM
-
-while true; do sleep 1; done

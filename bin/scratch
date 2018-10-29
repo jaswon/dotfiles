@@ -1,4 +1,0 @@
-#!/usr/bin/sh
-sleep .5
-bspc query -N -n .floating > /tmp/scratchid 
-while true; do vim -n ~/.scratchpad; done
