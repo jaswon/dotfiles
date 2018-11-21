@@ -26,7 +26,7 @@ noti () {
 
 base () {
 	while :; do
-		DATE=$(date '+(%^a) %b %_d, %Y %I:%M %p')
+		DATE=$(date '+(%a) %b %_d, %Y %I:%M %P')
 		BAT_LVL=$(acpi -b | head -n1 | cut -d, -f2 | tail -c+2 )
 		BAT_STS=$(acpi -a | cut -d' ' -f3 | cut -d- -f1)
 		case $BAT_STS in
