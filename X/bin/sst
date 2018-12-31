@@ -1,7 +1,9 @@
 #!/bin/sh
 
-FP=~/tmp/$(date +%s).png
+DIR=~/tmp/scrots/
+FP=$DIR$(date +%s).png
 
+mkdir -p $DIR
 case "$1" in
 	"s") maim -s $FP ;;
 	"") maim $FP ;;
