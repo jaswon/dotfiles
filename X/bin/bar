@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # this script acts as a single source of truth for
 # the notification pipe variable. source this script
@@ -8,17 +8,17 @@ NOTI_FIFO=/tmp/noti
 # return if bar is already running
 [[ "$(pidof -x $(basename $0) -o %PPID)" ]] && return
 
-[[ -e $NOTI_FIFO ]] && rm $NOTI_FIFO # clean up previous fifo
+rm -f $NOTI_FIFO # clean up previous fifo
 mkfifo $NOTI_FIFO # create new fifo
 tail -f /dev/null > $NOTI_FIFO & # keep fifo open
 
 noti () {
 	EXITPID= # pid of notification dismiss timer
 	while read -r duration content; do # read from fifo
-		# if previous dismiss timer exists, stop it
-		[[ "$EXITPID" ]] && kill $EXITPID
-		# set new dismiss timer
-		sleep $duration && echo NOTI_DONE && EXITPID= &
+		# kill previous dismiss timer
+		kill $EXITPID > /dev/null 2>&1
+		# start new dismiss timer
+		sleep $duration && echo NOTI_DONE &
 		EXITPID=$!
 		echo "NOTI$content"
 	done < $NOTI_FIFO
@@ -47,7 +47,7 @@ nmcli m | stdbuf -oL grep Networkmanager | stdbuf -oL cut -d\  -f6 |\
 while read -r; do
 	case $REPLY in
 		"'connected'") echo "3 $WIFI_UP $(nmcli -t -f active,ssid dev wifi | grep '^yes' | cut -d: -f2)" ;;
-		"'disconnected'") echo "3 ${WIFI_DOWN} Disconnected" ;;
+		"'disconnected'") echo "3 $WIFI_DOWN Disconnected" ;;
 	esac
 done > $NOTI_FIFO &
 
@@ -57,5 +57,5 @@ done > $NOTI_FIFO &
 		"NOTI_DONE") NOTI="" ;;
 		"NOTI"*) NOTI=" ${REPLY#NOTI} |" ;;
 	esac
-	xsetroot -name "$NOTI$BASE" &> /dev/null
+	echo "$NOTI$BASE"
 done

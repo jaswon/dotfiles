@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # source noti fifo from bar
 source $(which bar)

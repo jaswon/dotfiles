@@ -14,7 +14,7 @@ xrandr --dpi 83
 compton -b
 
 # bar
-bar &
+bar | xargs -d$'\n' -I{} xsetroot -name "{}" &
 
 # open term by default
 exec st &
