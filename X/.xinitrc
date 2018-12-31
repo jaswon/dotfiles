@@ -6,7 +6,7 @@
 xset b off # prevents beep
 xset s off -dpms # prevent screen blanking
 
-. ./xinput
+. ~/.xinput
 
 # set dpi
 xrandr --dpi 83
