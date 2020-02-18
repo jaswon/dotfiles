@@ -3,88 +3,91 @@ let mapleader = "s"
 map s <nop>
 
 set nocompatible
+set hidden
 
 " vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'jiangmiao/auto-pairs'
 Plug 'easymotion/vim-easymotion'
-Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'jremmen/vim-ripgrep'
-Plug 'w0rp/ale'
-Plug 'tpope/vim-surround'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-sandwich'
+
 Plug 'spolu/dwm.vim'
 
-Plug 'autozimu/LanguageClient-neovim', { 'branch':'next', 'do': 'bash install.sh' }
+Plug 'w0rp/ale'
+
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html', 'xml' ] }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript'] }
-Plug 'maxmellon/vim-jsx-pretty', { 'for': ['javascript.jsx'] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
+Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
+Plug 'mxw/vim-jsx', { 'for': [ 'javascript.jsx' ] }
+Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
+Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript' ] }
 
 call plug#end()
 
-" vim-js
+if !empty(glob('~/.config/.vimrc'))
+	source ~/.config/.vimrc
+endif
+
 let g:javascript_plugin_flow = 1
-
-" fzf
-
-function! s:open_dwm(file)
-	if exists("*DWM_New")
-		call DWM_New()
-	endif
-	exe "edit" a:file[0]
-endfunction
-let g:fzf_action = {
-\ 'ctrl-n': function('s:open_dwm'),
-\ 'enter': 'edit' }
-
-function! s:find_git_root()
-  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
-  return v:shell_error ? '' : root
-endfunction
-
-command! -bang -nargs=* ProjectFiles call fzf#run(fzf#wrap({
-\ 'source':  'rg --files',
-\ 'dir':     s:find_git_root(),
-\ 'options': '--color=dark,hl:46,hl+:46 --prompt "ProjectFiles> "'
-\}))
-nnoremap <c-p> :ProjectFiles<cr>
-nnoremap \ :Rg<space>
-
-" LSP
-set hidden
-let g:LanguageClient_serverCommands = {
-\ "javascript.jsx": [ 'flow-language-server', '--stdio', '--try-flow-bin' ],
-\ "go": [ 'go-langserver' ],
-\}
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 
 " ALE
 let g:ale_linters_explicit = 1
 let g:ale_linters = {
-\ "javascript": ['flow'],
-\ "go": ['gofmt', 'go build'],
-\}
+	\ "javascript": [ 'eslint', 'flow', 'flow-language-server' ],
+	\ "typescript": [ 'eslint', 'tsserver' ],
+	\ "go": [ 'go build', 'golint', 'gopls' ],
+	\ "python": [ 'pylint', 'pyls', 'mypy' ],
+	\}
 let g:ale_fixers = {
-\ "javascript": ['prettier'],
-\ "scss": ['prettier'],
-\ "go": ['gofmt'],
-\}
+	\ "javascript": [ 'prettier' ],
+	\ "typescript": [ 'prettier' ],
+	\ "scss": [ 'prettier' ],
+	\ "go": [ 'gofmt' ],
+	\ "python": [ 'black', 'isort' ],
+	\}
 
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 1
+let g:ale_completion_enabled = 0
+
+let g:ale_python_pylint_options = '-E -j0'
+
+nmap <silent> <leader>n <Plug>(ale_next_wrap)
+nmap <silent> <leader>p <Plug>(ale_previous_wrap)
+
+nmap <silent> gd <Plug>(ale_go_to_definition)
+nmap <silent> gsd <Plug>(ale_go_to_definition_in_vsplit)
+nmap <silent> gr <Plug>(ale_find_references)
+nmap <silent> <s-k> <Plug>(ale_hover)
+
+" Ctrlp
+let g:ctrlp_user_command = "rg --hidden --files '%s'"
+let g:ctrlp_prompt_mappings = {
+	\ 'AcceptSelection("v")': ['<c-n>'],
+	\ 'PrtHistory(-1)': [],
+	\ }
+let g:ctrlp_match_window = 'min:20,max:20'
+
+" Vim Sandwich
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+	\ {'buns': ['{ ', ' }'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['{']},
+	\ {'buns': ['[ ', ' ]'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['[']},
+	\ {'buns': ['( ', ' )'], 'nesting': 1, 'match_syntax': 1, 'kind': ['add', 'replace'], 'action': ['add'], 'input': ['(']},
+	\ {'buns': ['{\s*', '\s*}'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['{']},
+	\ {'buns': ['\[\s*', '\s*\]'], 'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['[']},
+	\ {'buns': ['(\s*', '\s*)'],   'nesting': 1, 'regex': 1, 'match_syntax': 1, 'kind': ['delete', 'replace', 'textobj'], 'action': ['delete'], 'input': ['(']},
+	\ ]
 
 " Commentary - note: <c-_> is ctrl+slash
 nmap <c-_> <Plug>CommentaryLine
@@ -105,38 +108,27 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
 " Emmet
-imap ;; <plug>(emmet-expand-abbr)
-
-" latex stuff
-let g:tex_flavor = "latex"
-let g:vimtex_view_method = 'zathura'
+" let g:user_emmet_leader_key=';'
+imap ;; <Plug>(emmet-expand-abbr)
 
 syntax on
 filetype plugin indent on
 
+" manage filetypes
+au BufRead,BufNewFile *.ts setfiletype typescript
+
 " tabbing setup
-function! TabSetup ()
-  set tabstop=2
-  set softtabstop=0
-  set noexpandtab
-  set shiftwidth=2
-  set autoindent
-endfunction
+set ts=4 sw=4 sts=0 ai
 
-call TabSetup()
-
-" tabbing for Markdown
-au Filetype markdown setl ts=4 sts=4 sw=4 et
-
-" tabbing for jsx
-au Filetype javascript.jsx setl et sw=4 ts=4
-
-" tabbing for sass
-au Filetype scss setl et sw=4 ts=4
+au Filetype markdown setl et sts=4
+au Filetype javascript.jsx setl et
+au Filetype scss setl et
 
 set path+=**
+set mouse=a
 set wildmenu
 set wildmode=longest,list,full
+set completeopt=menuone
 set number norelativenumber
 set incsearch showmatch
 set splitbelow splitright
@@ -144,33 +136,44 @@ set ignorecase smartcase
 set gdefault
 set backspace=indent,eol,start
 set autowrite " write when make
-set timeoutlen=150
+set timeoutlen=200
 set showcmd " show partial command in status
-set background=dark
 set backupcopy=yes
-set statusline=[%n]\ %F "buffer number and filename
+set statusline=[%n]\ %F%=[%l\ /\ %L,\ %02v]\  " buffer number and filename
 set laststatus=2 " always show statusline
-set mouse=a
+set conceallevel=0
+set scrolloff=4
 
 " cursorline for current pane only
-highlight CursorLine cterm=NONE ctermbg=238 guibg=#444444
+highlight CursorLine cterm=NONE ctermbg=8
 augroup CursorLine
-    au!
-    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
+	au!
+	au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+	au WinLeave * setlocal nocursorline
 augroup END
 
 " clear highlight
-noremap <leader><space> :nohl<cr>
+noremap <leader><space> <Cmd>nohl<cr>
 
 " trailing whitespace
-set list listchars=tab:\ \ ,trail:¬
+set list listchars=tab:\│\ ,trail:¬
+hi Tabs ctermbg=NONE ctermfg=DarkGrey guibg=NONE guifg=DarkGrey
 hi Whitespace ctermbg=NONE ctermfg=Red guibg=NONE guifg=Red
+augroup Tabs
+	au!
+	au VimEnter,WinEnter,BufWinEnter * match Tabs /\t/
+" match Whitespace /\s\+$/
+augroup END
 
 " exit insert mode
 inoremap jk <esc>
 inoremap kj <esc>
-inoremap <esc> <nop>
+
+" file save
+nnoremap ,, <Cmd>write<cr>
+
+" open term
+noremap <leader>t <Cmd>vsp \| term <cr>i
 
 " placeholder navigation - go to next <++>
 inoremap <space><tab> <esc>/<++><cr>"_c4l
@@ -185,7 +188,3 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
-
-" new file templates
-au BufNewFile *.tex :-1read $HOME/.vim/templates/tex
-au BufNewFile *.html :-1read $HOME/.vim/templates/html

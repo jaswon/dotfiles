@@ -1,5 +1,8 @@
 *.swp
+bash/.config/.profile
+vim/.config/.vimrc
 vim/.vim/spell
 vim/.vim/.netrwhist
 vim/.vim/plugged
 vim/.vim/autoload/plug.vim
+vim/.vim/autoload/plug.vim.old

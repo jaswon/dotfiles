@@ -1,7 +1,5 @@
 [user]
 	email = jasonwon628@gmail.com
 	name = jaswon5791
-
-[pager]
-	diff = diff-so-fancy | less --tabs=2 -RFX
-	show = diff-so-fancy | less --tabs=2 -RFX
+[url "git@github.com:"]
+	insteadOf = https://github.com/
