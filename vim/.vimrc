@@ -114,9 +114,6 @@ imap ;; <Plug>(emmet-expand-abbr)
 syntax on
 filetype plugin indent on
 
-" manage filetypes
-au BufRead,BufNewFile *.ts setfiletype typescript
-
 " tabbing setup
 set ts=4 sw=4 sts=0 ai
 
