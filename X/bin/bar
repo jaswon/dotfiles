@@ -6,7 +6,7 @@
 NOTI_FIFO=/tmp/noti
 
 # return if bar is already running
-[[ "$(pidof -x $(basename $0) -o %PPID)" ]] && return
+[[ "$(pidof -x bar -o %PPID)" ]] && return
 
 rm -f $NOTI_FIFO # clean up previous fifo
 mkfifo $NOTI_FIFO # create new fifo
