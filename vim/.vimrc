@@ -25,7 +25,7 @@ Plug 'spolu/dwm.vim'
 Plug 'w0rp/ale'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html', 'typescript' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript.jsx' ] }
 Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
