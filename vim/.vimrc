@@ -108,7 +108,6 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
 " Emmet
-" let g:user_emmet_leader_key=';'
 imap ;; <Plug>(emmet-expand-abbr)
 
 syntax on
