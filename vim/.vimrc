@@ -33,10 +33,6 @@ Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript' ] }
 
 call plug#end()
 
-if !empty(glob('~/.config/.vimrc'))
-	source ~/.config/.vimrc
-endif
-
 let g:javascript_plugin_flow = 1
 
 " ALE
@@ -184,3 +180,8 @@ inoremap <right> <nop>
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
+
+" load machine specific configuration
+if !empty(glob('~/.config/.vimrc'))
+	source ~/.config/.vimrc
+endif
