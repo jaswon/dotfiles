@@ -3,3 +3,5 @@
 	name = jaswon5791
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[diff]
+	algorithm = patience
