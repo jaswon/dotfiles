@@ -29,7 +29,7 @@ e () {
 		$EDITOR "$@"
 	fi
 }
-workon () { venv=$(pipenv --venv 2>/dev/null) && source "$venv/bin/activate" || echo "no venv"; }
+workon () { venv=$(pipenv --venv 2>/dev/null) && source .env && source "$venv/bin/activate" || echo "no venv"; }
 cd () { builtin cd "$@" && ls; }
 todo () { git grep -I 'TODO:'; }
 rg () {
