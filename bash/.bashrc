@@ -13,13 +13,6 @@ alias z='zathura'
 alias math='python -ic "from math import *; import numpy as np"'
 alias unix='date -r'
 
-bind TAB:complete                          # tab complete
-bind "\e[1;5C":forward-word                # ctrl + left
-bind "\e[1;5D":backward-word               # ctrl + left
-bind "set bell-style none"                 # disable console beep
-bind "set show-all-if-ambiguous on"        # list matches on completion
-bind "set menu-complete-display-prefix on" # partial complete on first tab
-
 # disable xon/xoff
 stty -ixon
 

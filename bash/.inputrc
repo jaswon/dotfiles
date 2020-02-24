@@ -1,0 +1,15 @@
+# tab complete
+"TAB": complete
+
+# ctr + arrow keys
+"\ef": forward-word
+"\eb": backward-word
+
+# disable console beep
+set bell-style none
+
+# list matches on completion
+set show-all-if-ambiguous on
+
+# partial complete on first tab
+set menu-complete-display-prefix on
