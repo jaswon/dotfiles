@@ -8,7 +8,7 @@ GREEN="\[\e[32m\]"
 CYAN="\[\e[34m\]"
 RESET="\[\e[39m\]"
 
-function inv () { printf '\e[7m%s\e[27m' "$@"; }
+function inv () { printf '\[\e[7m\]%s\[\e[27m\]' "$@"; }
 
 function git_info () {
   if git rev-parse --git-dir > /dev/null 2>&1; then
