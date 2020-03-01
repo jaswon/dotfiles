@@ -15,7 +15,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
@@ -66,13 +66,9 @@ nmap <silent> gsd <Plug>(ale_go_to_definition_in_vsplit)
 nmap <silent> gr <Plug>(ale_find_references)
 nmap <silent> <s-k> <Plug>(ale_hover)
 
-" Ctrlp
-let g:ctrlp_user_command = "rg --hidden --files '%s'"
-let g:ctrlp_prompt_mappings = {
-	\ 'AcceptSelection("v")': ['<c-n>'],
-	\ 'PrtHistory(-1)': [],
-	\ }
-let g:ctrlp_match_window = 'min:20,max:20'
+" fzf
+nnoremap <c-p> :FZF<cr>
+let g:fzf_action = { 'ctrl-n': 'vsplit' }
 
 " Vim Sandwich
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
