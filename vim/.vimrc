@@ -70,6 +70,13 @@ nmap <silent> <s-k> <Plug>(ale_hover)
 nnoremap <c-p> :FZF<cr>
 let g:fzf_action = { 'ctrl-n': 'vsplit' }
 
+" expand pairs
+inoremap ( ()<esc>i
+inoremap [ []<esc>i
+inoremap { {}<esc>i
+inoremap " ""<esc>i
+inoremap ' ''<esc>i
+
 " Vim Sandwich
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 let g:sandwich#recipes += [
