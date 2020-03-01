@@ -103,6 +103,9 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
+" EasyAlign
+vmap <Enter> <Plug>(EasyAlign)
+
 " Emmet
 imap ;; <Plug>(emmet-expand-abbr)
 
