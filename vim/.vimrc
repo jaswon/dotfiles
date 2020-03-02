@@ -169,20 +169,6 @@ nnoremap ,, <Cmd>write<cr>
 " open term
 noremap <leader>t <Cmd>vsp \| term <cr>i
 
-" placeholder navigation - go to next <++>
-inoremap <space><tab> <esc>/<++><cr>"_c4l
-nnoremap <space><tab> /<++><cr>"_c4l
-
-" disable arrow keys
-noremap <right> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-inoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-
 " load machine specific configuration
 if !empty(glob('~/.config/.vimrc'))
 	source ~/.config/.vimrc
