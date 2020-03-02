@@ -25,7 +25,6 @@ Plug 'spolu/dwm.vim'
 Plug 'w0rp/ale'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html', 'typescript' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript.jsx' ] }
 Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
@@ -108,9 +107,6 @@ map <Leader>l <Plug>(easymotion-lineforward)
 
 " EasyAlign
 vmap <Enter> <Plug>(EasyAlign)
-
-" Emmet
-imap ;; <Plug>(emmet-expand-abbr)
 
 syntax on
 filetype plugin indent on
