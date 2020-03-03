@@ -7,8 +7,10 @@ YELLOW="\[\e[33m\]"
 GREEN="\[\e[32m\]"
 CYAN="\[\e[34m\]"
 RESET="\[\e[39m\]"
+BOW="\[\e[7m\]"
+WOB="\[\e[27m\]"
 
-function inv () { printf '\[\e[7m\]%s\[\e[27m\]' "$@"; }
+function inv () { printf '\e[7m%s\e[27m' "$@"; }
 
 function git_info () {
   if git rev-parse --git-dir > /dev/null 2>&1; then
@@ -45,13 +47,24 @@ function git_info () {
   fi
 }
 
+function len_basename () {
+	if [[ $(pwd) == "$HOME" ]]; then
+		echo -n 1
+	else
+		printf '%s' $(basename $(pwd)) | wc -c
+	fi
+}
+
 function virtualenv_info () {
   [[ -n $VIRTUAL_ENV ]] && echo "($(basename $VIRTUAL_ENV)) "
 }
 
 function set_prompt () {
+	PS1="╰ $(virtualenv_info)${CYAN}\W \$$(git_info) ${RESET}"
 	echo
-	PS1="$(inv '*') $(virtualenv_info)${CYAN}\W \$$(git_info) ${RESET}"
+	printf '╭'
+	printf '─%.0s' $(seq -2 $(len_basename))
+	echo
 }
 
 PROMPT_COMMAND=set_prompt
