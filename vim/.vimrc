@@ -15,7 +15,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'easymotion/vim-easymotion'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
@@ -25,7 +25,6 @@ Plug 'spolu/dwm.vim'
 Plug 'w0rp/ale'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html', 'typescript' ] }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript.jsx' ] }
 Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
@@ -66,13 +65,16 @@ nmap <silent> gsd <Plug>(ale_go_to_definition_in_vsplit)
 nmap <silent> gr <Plug>(ale_find_references)
 nmap <silent> <s-k> <Plug>(ale_hover)
 
-" Ctrlp
-let g:ctrlp_user_command = "rg --hidden --files '%s'"
-let g:ctrlp_prompt_mappings = {
-	\ 'AcceptSelection("v")': ['<c-n>'],
-	\ 'PrtHistory(-1)': [],
-	\ }
-let g:ctrlp_match_window = 'min:20,max:20'
+" fzf
+nnoremap <c-p> :FZF<cr>
+let g:fzf_action = { 'ctrl-n': 'vsplit' }
+
+" expand pairs
+inoremap ( ()<esc>i
+inoremap [ []<esc>i
+inoremap { {}<esc>i
+inoremap " ""<esc>i
+inoremap ' ''<esc>i
 
 " Vim Sandwich
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
@@ -103,8 +105,8 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
 
-" Emmet
-imap ;; <Plug>(emmet-expand-abbr)
+" EasyAlign
+vmap <Enter> <Plug>(EasyAlign)
 
 syntax on
 filetype plugin indent on
@@ -166,20 +168,6 @@ nnoremap ,, <Cmd>write<cr>
 
 " open term
 noremap <leader>t <Cmd>vsp \| term <cr>i
-
-" placeholder navigation - go to next <++>
-inoremap <space><tab> <esc>/<++><cr>"_c4l
-nnoremap <space><tab> /<++><cr>"_c4l
-
-" disable arrow keys
-noremap <right> <nop>
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-inoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
 
 " load machine specific configuration
 if !empty(glob('~/.config/.vimrc'))
