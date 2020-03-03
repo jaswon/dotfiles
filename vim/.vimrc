@@ -67,6 +67,7 @@ nmap <silent> <s-k> <Plug>(ale_hover)
 
 " fzf
 nnoremap <c-p> :FZF<cr>
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --iglob ''!.git/'''
 let g:fzf_action = { 'ctrl-n': 'vsplit' }
 
 " expand pairs
