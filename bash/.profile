@@ -15,4 +15,8 @@ if [ ! -S ~/.ssh/ssh_auth_sock ]; then
   ln -sf "$SSH_AUTH_SOCK" ~/.ssh/ssh_auth_sock
 fi
 export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock
-ssh-add -A
+
+case $(uname) in
+	Linux) ssh-add ;;
+	Darwin) ssh-add -A ;;
+esac
