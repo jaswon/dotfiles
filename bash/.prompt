@@ -47,12 +47,8 @@ function git_info () {
   fi
 }
 
-function len_basename () {
-	if [[ $(pwd) == "$HOME" ]]; then
-		echo -n 1
-	else
-		printf '%s' $(basename $(pwd)) | wc -c
-	fi
+function len_prompt () {
+	echo $(virtualenv_info) $([ $(pwd) == "$HOME" ] && echo '~' || echo ${PWD##*/}) | wc -c
 }
 
 function virtualenv_info () {
@@ -63,7 +59,7 @@ function set_prompt () {
 	PS1="╰ $(virtualenv_info)${CYAN}\W \$$(git_info) ${RESET}"
 	echo
 	printf '╭'
-	printf '─%.0s' $(seq -2 $(len_basename))
+	printf '─%.0s' $(seq -1 $(len_prompt))
 	echo
 }
 
