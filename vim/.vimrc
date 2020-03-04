@@ -14,6 +14,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'NLKNguyen/papercolor-theme'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
@@ -32,6 +34,10 @@ Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript' ] }
 
 call plug#end()
+
+" theme
+set background=light
+colorscheme PaperColor
 
 let g:javascript_plugin_flow = 1
 
