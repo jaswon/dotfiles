@@ -11,8 +11,6 @@ xset s off -dpms # prevent screen blanking
 # set dpi
 xrandr --dpi 83
 
-compton -b
-
 # bar
 bar | xargs -d$'\n' -I{} xsetroot -name "{}" &
 
