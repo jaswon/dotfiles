@@ -19,6 +19,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-sandwich'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'spolu/dwm.vim'
 
@@ -69,13 +70,6 @@ nmap <silent> <s-k> <Plug>(ale_hover)
 nnoremap <c-p> :FZF<cr>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --iglob ''!.git/'''
 let g:fzf_action = { 'ctrl-n': 'vsplit' }
-
-" expand pairs
-inoremap ( ()<esc>i
-inoremap [ []<esc>i
-inoremap { {}<esc>i
-inoremap " ""<esc>i
-inoremap ' ''<esc>i
 
 " Vim Sandwich
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
