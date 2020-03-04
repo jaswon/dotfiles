@@ -14,6 +14,8 @@ xrandr --dpi 83
 # bar
 bar | xargs -d$'\n' -I{} xsetroot -name "{}" &
 
+xsetroot -solid '#eee'
+
 # open term by default
 exec st &
 
