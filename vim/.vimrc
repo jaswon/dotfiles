@@ -25,18 +25,19 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'spolu/dwm.vim'
 
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript.jsx' ] }
 Plug 'vim-python/python-syntax', { 'for': [ 'python' ] }
 Plug 'leafgarland/typescript-vim', { 'for': [ 'typescript' ] }
+Plug 'mattn/emmet-vim', { 'for': [ 'javascript.jsx', 'html' ] }
 
 call plug#end()
 
 " theme
-set background=light
+set background=dark
 colorscheme PaperColor
 
 let g:javascript_plugin_flow = 1
@@ -46,7 +47,7 @@ let g:ale_linters_explicit = 1
 let g:ale_linters = {
 	\ "javascript": [ 'eslint', 'flow', 'flow-language-server' ],
 	\ "typescript": [ 'eslint', 'tsserver' ],
-	\ "go": [ 'go build', 'golint', 'gopls' ],
+	\ "go": [ 'gopls' ],
 	\ "python": [ 'pylint', 'pyls', 'mypy' ],
 	\}
 let g:ale_fixers = {
@@ -68,9 +69,9 @@ nmap <silent> <leader>n <Plug>(ale_next_wrap)
 nmap <silent> <leader>p <Plug>(ale_previous_wrap)
 
 nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> gsd <Plug>(ale_go_to_definition_in_vsplit)
+nmap <silent> gsd :ALEGoToDefinition -vsplit<cr>
 nmap <silent> gr <Plug>(ale_find_references)
-nmap <silent> <s-k> <Plug>(ale_hover)
+nmap <silent> K <Plug>(ale_hover)
 
 " fzf
 nnoremap <c-p> :FZF<cr>
@@ -105,6 +106,11 @@ map <Leader>h <Plug>(easymotion-linebackward)
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 map <Leader>l <Plug>(easymotion-lineforward)
+
+
+" Emmett
+imap ;; <plug>(emmet-expand-abbr)
+
 
 " EasyAlign
 vmap <Enter> <Plug>(EasyAlign)
