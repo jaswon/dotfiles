@@ -25,7 +25,7 @@ Plug 'jiangmiao/auto-pairs'
 
 Plug 'spolu/dwm.vim'
 
-Plug 'dense-analysis/ale'
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'pangloss/vim-javascript', { 'for': [ 'javascript' ] }
@@ -42,36 +42,56 @@ colorscheme PaperColor
 
 let g:javascript_plugin_flow = 1
 
-" ALE
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-	\ "javascript": [ 'eslint', 'flow', 'flow-language-server' ],
-	\ "typescript": [ 'eslint', 'tsserver' ],
-	\ "go": [ 'gopls' ],
-	\ "python": [ 'pylint', 'pyls', 'mypy' ],
-	\}
-let g:ale_fixers = {
-	\ "javascript": [ 'prettier' ],
-	\ "typescript": [ 'prettier' ],
-	\ "scss": [ 'prettier' ],
-	\ "go": [ 'gofmt' ],
-	\ "python": [ 'black', 'isort' ],
-	\}
+" LSP
+lua <<EOF
+local nvim_lsp = require'nvim-lsp'
 
-let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 1
-let g:ale_completion_enabled = 0
+nvim_lsp.tsserver.setup{}
+nvim_lsp.gopls.setup{}
+nvim_lsp.pyls.setup{}
+EOF
 
-let g:ale_python_pylint_options = '-E -j0'
+nnoremap <silent> gd <cmd>lua vim.lsp.buf.declaration()<cr>
+nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<cr>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<cr>
 
-nmap <silent> <leader>n <Plug>(ale_next_wrap)
-nmap <silent> <leader>p <Plug>(ale_previous_wrap)
+set omnifunc=v:lua.vim.lsp.omnifunc
 
-nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> gsd :ALEGoToDefinition -vsplit<cr>
-nmap <silent> gr <Plug>(ale_find_references)
-nmap <silent> K <Plug>(ale_hover)
+augroup FormatOnSave
+	au!
+	au BufWritePre *.go lua vim.lsp.buf.formatting_sync()
+augroup END
+
+" " ALE
+" let g:ale_linters_explicit = 1
+" let g:ale_linters = {
+" 	\ "javascript": [ 'eslint', 'flow', 'flow-language-server' ],
+" 	\ "typescript": [ 'eslint', 'tsserver' ],
+" 	\ "go": [ 'gopls' ],
+" 	\ "python": [ 'pylint', 'pyls', 'mypy' ],
+" 	\}
+" let g:ale_fixers = {
+" 	\ "javascript": [ 'prettier' ],
+" 	\ "typescript": [ 'prettier' ],
+" 	\ "scss": [ 'prettier' ],
+" 	\ "go": [ 'gofmt' ],
+" 	\ "python": [ 'black', 'isort' ],
+" 	\}
+
+" let g:ale_fix_on_save = 1
+" let g:ale_lint_on_text_changed = 0
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_completion_enabled = 0
+
+" let g:ale_python_pylint_options = '-E -j0'
+
+" nmap <silent> <leader>n <Plug>(ale_next_wrap)
+" nmap <silent> <leader>p <Plug>(ale_previous_wrap)
+
+" nmap <silent> gd <Plug>(ale_go_to_definition)
+" nmap <silent> gsd :ALEGoToDefinition -vsplit<cr>
+" nmap <silent> gr <Plug>(ale_find_references)
+" nmap <silent> K <Plug>(ale_hover)
 
 " fzf
 nnoremap <c-p> :FZF<cr>
