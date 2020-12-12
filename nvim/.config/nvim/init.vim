@@ -18,6 +18,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'tmsvg/pear-tree'
+Plug 'tpope/vim-surround'
 Plug 'spolu/dwm.vim'
 
 call plug#end()
