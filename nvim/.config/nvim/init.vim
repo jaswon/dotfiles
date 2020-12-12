@@ -75,8 +75,10 @@ set laststatus=2 " always show statusline
 set conceallevel=0
 set scrolloff=4
 
+" no escape
 tnoremap jk <c-\><c-n>
 inoremap jk <esc>
+inoremap kj <esc>
 
 " cursorline for current pane only
 highlight CursorLine cterm=NONE ctermbg=8
