@@ -11,3 +11,4 @@ export CDPATH="~/.cdpath"
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
+[ -f ~/.cargo/env ] && . ~/.cargo/env
