@@ -76,7 +76,6 @@ set conceallevel=0
 set scrolloff=4
 
 " no escape
-tnoremap jk <c-\><c-n>
 inoremap jk <esc>
 inoremap kj <esc>
 
@@ -103,6 +102,7 @@ augroup END
 
 " open term
 noremap <leader>t :vsplit term://bash<cr>i
+tnoremap jk <c-\><c-n>
 
 " load machine specific configuration
 if !empty(glob('~/.config/.vimrc'))
