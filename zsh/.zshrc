@@ -7,13 +7,18 @@ setopt correct                                                  # Auto correct m
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
 setopt nocaseglob                                               # Case insensitive globbing
 
+# completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-zstyle ':completion:*' rehash true                              # automatically find new executables in path 
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+
+autoload -Uz compinit colors
+compinit
+colors
 
 # history options
 setopt SHARE_HISTORY # share history across sessions
@@ -27,9 +32,10 @@ SAVEHIST=500
 bindkey -e
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
+bindkey '^H' backward-kill-word
 
 # word boundaries
-WORDCHARS=${WORDCHARS//[-&.;]}
+WORDCHARS=${WORDCHARS//[-&.;\/]}
 
 # disable xon/xoff
 stty -ixon
@@ -55,11 +61,23 @@ fi
 }
 
 # ls after cd
-function cd_ls () { ls }
-chpwd_functions=(cd_ls)
+function ls_after_cd () { ls }
+chpwd_functions=(ls_after_cd)
 
 # prompt
 [[ -f ~/etc/prompt.zsh ]] && source ~/etc/prompt.zsh
 
 # git conveniences
 [[ -f ~/etc/git.zsh ]] && source ~/etc/git.zsh
+
+# Use autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^ ' autosuggest-accept
+
+# Use syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Use history substring search
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
