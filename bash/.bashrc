@@ -7,10 +7,7 @@ alias la='ls -A'
 alias ll='ls -lh'
 alias lal='ls -Alh'
 alias pls='sudo $(fc -ln -1)'
-alias serve='python3 -m http.server'
 alias se='sudoedit'
-alias z='zathura'
-alias math='python -ic "from math import *; import numpy as np"'
 alias unix='date -r'
 
 # disable xon/xoff
