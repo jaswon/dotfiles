@@ -43,15 +43,15 @@ alias pls='sudo $(fc -ln -1)'
 
 # editor
 function e () {
-    if [ $# -eq 0 ]; then
-        if jobs '$EDITOR' &>/dev/null; then
-            fg %'$EDITOR'
-        else
-            $EDITOR
-        fi
+if [ $# -eq 0 ]; then
+    if jobs '$EDITOR' &>/dev/null; then
+        fg %'$EDITOR'
     else
-        $EDITOR "$@"
+        $EDITOR
     fi
+else
+    $EDITOR "$@"
+fi
 }
 
 # ls after cd
