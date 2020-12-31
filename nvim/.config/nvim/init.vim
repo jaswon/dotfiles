@@ -17,7 +17,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
-Plug 'tmsvg/pear-tree'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'spolu/dwm.vim'
 
@@ -44,11 +44,6 @@ map <leader>h <Plug>(easymotion-linebackward)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 map <leader>l <Plug>(easymotion-lineforward)
-
-" Pear Tree
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
 
 syntax on
 filetype plugin indent on
