@@ -96,7 +96,7 @@ augroup Tabs
 augroup END
 
 " open term
-noremap <leader>t :vsplit term://bash<cr>i
+noremap <leader>t :vsplit term://$SHELL<cr>i
 tnoremap jk <c-\><c-n>
 
 " load machine specific configuration
