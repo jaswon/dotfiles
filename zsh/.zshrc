@@ -65,19 +65,19 @@ function ls_after_cd () { ls }
 chpwd_functions=(ls_after_cd)
 
 # prompt
-[[ -f ~/etc/prompt.zsh ]] && source ~/etc/prompt.zsh
+source ~/.zsh/prompt.zsh
 
 # git conveniences
-[[ -f ~/etc/git.zsh ]] && source ~/etc/git.zsh
+source ~/.zsh/git.zsh
 
 # Use autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^ ' autosuggest-accept
 
 # Use syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Use history substring search
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
