@@ -39,7 +39,7 @@ function virtualenv_info () {
 function set_prompt () {
     PS1="╰ $(virtualenv_info)%F{cyan}%1~ \$ $(git_info)%f"
     local zero='%([BSUbfksu]|([FK]|){*})'
-    printf '\n╭%*s\n' $(( ${#${(S%%)PS1//$~zero/}} - 2 )) | sed 's/ /\xe2\x94\x80/g'
+    printf '\n╭%*s\n' $(( ${#${(S%%)PS1//$~zero/}} - 2 )) | sed $'s/ /\u2500/g'
 }
 
 precmd_functions=(set_prompt)
