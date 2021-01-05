@@ -8,7 +8,7 @@ install with `stow -S [package]`
 
 ## zsh
 
-`yay -S zsh zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search`
+`git submodule update --init`
 
 ## nvim
 
