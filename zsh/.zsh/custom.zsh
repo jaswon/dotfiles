@@ -5,6 +5,15 @@ alias ll='ls -lh'
 alias lal='ls -Alh'
 alias pls='sudo $(fc -ln -1)'
 
+# auto page ripgrep
+function rg() {
+    if [ -t 1 ]; then
+        command rg -p "$@" | less -RFX
+    else
+        command rg "$@"
+    fi
+}
+
 # editor
 function e () {
     if jobs 'e' &>/dev/null; then
