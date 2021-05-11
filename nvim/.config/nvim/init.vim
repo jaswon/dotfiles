@@ -92,6 +92,13 @@ map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 map <leader>l <Plug>(easymotion-lineforward)
 
+" quickfix
+aug QFClose
+    au!
+    au FileType qf nmap <buffer> <cr> :exe "wincmd p \| cc " . line('.') . " \| cclose"<cr>
+    au FileType qf nmap <buffer> <c-n> :exe "wincmd p \| leftabove vne \| cc " . line('.') . "\| cclose"<cr>
+aug END
+
 syntax on
 filetype plugin indent on
 
