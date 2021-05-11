@@ -14,14 +14,28 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'dstein64/vim-win'
+
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf'
 Plug 'tpope/vim-commentary'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'spolu/dwm.vim'
 
 call plug#end()
+
+" window mgmt
+map <c-w> <plug>WinWin
+let g:win_ext_command_map = {
+    \ "\<cr>": 'Win#exit',
+    \ 'c': 'wincmd c',
+    \ 'C': 'quit!',
+    \ 'n': 'top vne',
+    \ 'H': 'wincmd H',
+    \ 'J': 'wincmd J',
+    \ 'K': 'wincmd K',
+    \ 'L': 'wincmd L',
+    \ }
 
 " fzf
 nnoremap <c-p> :FZF<cr>
