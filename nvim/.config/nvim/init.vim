@@ -27,7 +27,16 @@ Plug 'mattn/vim-lsp-settings'
 
 call plug#end()
 
+" edit rc
+command! Rc :e $MYVIMRC
+
 " window mgmt
+function! ReflowWindows(dir)
+    let win = winnr()
+    exe 'windo wincmd ' . a:dir
+    exe win . ' wincmd w'
+endfunction
+
 map <c-w> <plug>WinWin
 let g:win_ext_command_map = {
     \ "\<cr>": 'Win#exit',
@@ -38,9 +47,15 @@ let g:win_ext_command_map = {
     \ 'J': 'wincmd J',
     \ 'K': 'wincmd K',
     \ 'L': 'wincmd L',
+    \ '-': 'call ReflowWindows("J")',
+    \ '|': 'call ReflowWindows("L")',
+    \ 'm': 'call ReflowWindows("J") | wincmd H',
     \ }
 
 " vim-lsp
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_virtual_text_enabled = 0
+
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
     setlocal signcolumn=auto
@@ -73,7 +88,7 @@ augroup END
 " fzf
 nnoremap <c-p> :FZF<cr>
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --iglob ''!.git/'''
-let g:fzf_action = { 'ctrl-n': 'vsplit' }
+let g:fzf_action = { 'ctrl-n': 'top vsplit' }
 
 " Commentary - note: <c-_> is ctrl+slash
 nmap <c-_> <Plug>CommentaryLine
