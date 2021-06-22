@@ -1,8 +1,10 @@
 " vim-lsp
 
 let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_float_delay = 0
 let g:lsp_diagnostics_virtual_text_enabled = 0
 let g:lsp_format_sync_timeout = 100
+let g:lsp_document_code_action_signs_enabled = 0
 
 let g:lsp_settings = {
     \ 'gopls': {
