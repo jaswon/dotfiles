@@ -14,7 +14,7 @@ runtime editor.vim  " editor customization
 runtime window.vim  " window mgmt
 runtime motion.vim  " motion
 
-lua require('lsp') " lsp
+runtime lsp.lua " lsp
 
 " fzf
 nnoremap <c-p> :FZF<cr>
