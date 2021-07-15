@@ -1,26 +1,34 @@
 return require('packer').startup(function()
-  use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim'
 
-  use {
-    'nvim-telescope/telescope.nvim',
-    requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-    },
-  }
+    -- Telescope
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {
+            'nvim-lua/popup.nvim',
+            'nvim-lua/plenary.nvim',
+        },
+    }
 
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-  }
+    -- LSP config
+    use 'neovim/nvim-lspconfig'
 
-  use 'dstein64/vim-win'
+    -- TreeSitter
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+    }
 
-  use 'easymotion/vim-easymotion'
-  use 'tpope/vim-commentary'
-  use 'jiangmiao/auto-pairs'
-  use 'tpope/vim-surround'
+    -- Hop
+    use {
+        'phaazon/hop.nvim',
+        as = 'hop',
+    }
 
-  use 'neovim/nvim-lspconfig'
+    use 'dstein64/vim-win'
+
+    use 'tpope/vim-commentary'
+    use 'jiangmiao/auto-pairs'
+    use 'tpope/vim-surround'
 end)
 

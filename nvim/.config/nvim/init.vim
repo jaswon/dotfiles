@@ -13,10 +13,10 @@ lua require("plugins")
 lua require("lsp")
 lua require('config.telescope')
 lua require('config.treesitter')
+lua require('config.hop')
 
 runtime editor.vim     " editor customization
 runtime window.vim     " window mgmt
-runtime motion.vim     " motion
 
 " Commentary - note: <c-_> is ctrl+slash
 nmap <c-_> <Plug>CommentaryLine

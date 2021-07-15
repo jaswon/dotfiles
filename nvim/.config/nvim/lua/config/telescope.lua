@@ -1,3 +1,4 @@
+local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local sorters = require('telescope.sorters')
 
@@ -5,6 +6,12 @@ require('telescope').setup {
     defaults = {
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
+        mappings = {
+            i = {
+                ["<c-j>"] = actions.move_selection_next,
+                ["<c-k>"] = actions.move_selection_previous,
+            },
+        },
     },
 }
 
