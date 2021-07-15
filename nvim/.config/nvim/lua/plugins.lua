@@ -3,7 +3,15 @@ return require('packer').startup(function()
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'}
+    requires = {
+      'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim',
+    },
+  }
+
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
   }
 
   use 'dstein64/vim-win'
@@ -15,3 +23,4 @@ return require('packer').startup(function()
 
   use 'neovim/nvim-lspconfig'
 end)
+

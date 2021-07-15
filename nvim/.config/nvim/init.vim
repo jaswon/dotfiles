@@ -9,19 +9,14 @@ command! Rc :e $MYVIMRC
 inoremap jk <esc>
 inoremap kj <esc>
 
-runtime plugins.lua " plugin mgmt
+lua require("plugins")
+lua require("lsp")
+lua require('config.telescope')
+lua require('config.treesitter')
 
-runtime lsp.lua     " lsp
-runtime editor.vim  " editor customization
-runtime window.vim  " window mgmt
-runtime motion.vim  " motion
-
-
-
-" fzf
-nnoremap <c-p> :FZF<cr>
-let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --iglob ''!.git/'''
-let g:fzf_action = { 'ctrl-n': 'top vsplit' }
+runtime editor.vim     " editor customization
+runtime window.vim     " window mgmt
+runtime motion.vim     " motion
 
 " Commentary - note: <c-_> is ctrl+slash
 nmap <c-_> <Plug>CommentaryLine
