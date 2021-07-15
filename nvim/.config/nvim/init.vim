@@ -9,12 +9,14 @@ command! Rc :e $MYVIMRC
 inoremap jk <esc>
 inoremap kj <esc>
 
-runtime plugins.vim " plugin mgmt
+runtime plugins.lua " plugin mgmt
+
+runtime lsp.lua     " lsp
 runtime editor.vim  " editor customization
 runtime window.vim  " window mgmt
 runtime motion.vim  " motion
 
-runtime lsp.lua " lsp
+
 
 " fzf
 nnoremap <c-p> :FZF<cr>

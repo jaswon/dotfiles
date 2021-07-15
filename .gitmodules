@@ -7,3 +7,6 @@
 [submodule "zsh/.zsh/plugins/zsh-history-substring-search"]
 	path = zsh/.zsh/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "nvim/.local/share/nvim/site/pack/packer/start/packer.nvim"]
+	path = nvim/.local/share/nvim/site/pack/packer/start/packer.nvim
+	url = https://github.com/wbthomason/packer.nvim
