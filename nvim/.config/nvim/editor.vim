@@ -1,4 +1,4 @@
-" cursorline for current pane only
+" cursorline for current buffer only
 highlight CursorLine cterm=NONE ctermbg=8
 augroup CursorLine
 	au!
@@ -18,14 +18,8 @@ augroup END
 " tab behavior
 set et sw=4 ts=4
 
-" filetype
-syntax on
-filetype plugin indent on
-
 " statusline
 set statusline=[%n]\ %F%=[%l\ /\ %L,\ %02v]\  " buffer number and filename
-set laststatus=2                              " always show statusline
-set showcmd                                   " show partial command in status
 
 " line number
 set number norelativenumber
@@ -34,13 +28,11 @@ set number norelativenumber
 set splitbelow splitright
 
 " wildmenu
-set wildmenu
 set wildmode=longest:full,full
 
 " search
-set incsearch showmatch
+set showmatch
 set ignorecase smartcase
-
 
 " misc
 set confirm                     " confirm buffer close
@@ -51,4 +43,3 @@ set clipboard+=unnamedplus      " use clipboard register
 set path+=**                    " search subdirectories
 set mouse=a                     " mouse support
 set completeopt=menuone
-set backspace=indent,eol,start
