@@ -11,9 +11,11 @@ inoremap kj <esc>
 
 lua require("plugins")
 lua require("lsp")
+
 lua require('config.telescope')
 lua require('config.treesitter')
 lua require('config.hop')
+lua require('config.pairs')
 
 runtime editor.vim     " editor customization
 runtime window.vim     " window mgmt

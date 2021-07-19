@@ -13,7 +13,7 @@ return require('packer').startup(function()
     -- LSP config
     use 'neovim/nvim-lspconfig'
 
-    -- TreeSitter
+    -- Treesitter
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -25,10 +25,13 @@ return require('packer').startup(function()
         as = 'hop',
     }
 
+    -- Pairs
+    use 'windwp/nvim-autopairs'
+
+    -- Window mgmt
     use 'dstein64/vim-win'
 
     use 'tpope/vim-commentary'
-    use 'jiangmiao/auto-pairs'
     use 'tpope/vim-surround'
 end)
 
