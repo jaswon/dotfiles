@@ -16,7 +16,7 @@ augroup Tabs
 augroup END
 
 " tab behavior
-set et sw=4 ts=4
+set expandtab tabstop=4 shiftwidth=0
 
 " statusline
 set statusline=[%n]\ %F%=[%l\ /\ %L,\ %02v]\  " buffer number and filename
