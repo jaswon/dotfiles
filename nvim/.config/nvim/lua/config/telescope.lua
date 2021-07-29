@@ -26,3 +26,4 @@ end
 
 map('n', '<c-p>', '<cmd>call v:lua.project_files()<cr>', opts)
 map('n', '\\', '<cmd>Telescope live_grep<cr>', opts)
+map('n', '<s-tab>', '<cmd>Telescope buffers<cr>', opts)
