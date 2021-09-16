@@ -22,7 +22,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
 
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<c-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<c-k>', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
 
   buf_set_keymap('n', 'sp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', 'sn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)

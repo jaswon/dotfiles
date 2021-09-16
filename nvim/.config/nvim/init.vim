@@ -9,6 +9,9 @@ command! Rc :e $MYVIMRC
 inoremap jk <esc>
 inoremap kj <esc>
 
+" visual paste w/o yank
+vnoremap p "_dP
+
 lua require("plugins")
 lua require("lsp")
 
