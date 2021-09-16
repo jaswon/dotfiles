@@ -4,6 +4,7 @@ alias gs='git status'
 alias gsh='git show'
 alias ga='git add'
 alias gp='git push'
+alias gch='git checkout'
 alias gcb='git checkout -b'
 alias gca='git commit --amend --no-edit'
 
@@ -14,8 +15,8 @@ else
     alias gd='git diff'
 fi
 
-function gcm () { cd $(git rev-parse --show-toplevel) && git checkout master && git pull }
+function gr () { cd $(git rev-parse --show-toplevel); }
+function gcm () { gr && git checkout master && git pull }
 function gc () { git commit -m "$*" && git status }
-function gch () { cd $(git rev-parse --show-toplevel) && git checkout "$@"; }
 function gmm () { gcm && gch - && git merge master; }
 function gpo () { git push -u origin "$(git rev-parse --abbrev-ref HEAD)"; }
