@@ -1,6 +1,8 @@
 # refer: /usr/share/zsh/manjaro-zsh-config
 
 export EDITOR=nvim
+path=(~/bin $path)
+export PATH
 
 ## Options section
 setopt correct                                                  # Auto correct mistakes
