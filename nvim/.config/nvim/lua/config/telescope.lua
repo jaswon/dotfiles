@@ -4,6 +4,16 @@ local sorters = require('telescope.sorters')
 
 require('telescope').setup {
     defaults = {
+        vimgrep_arguments = {
+            "rg",
+            "--hidden",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case"
+        },
         file_sorter = sorters.get_fzy_sorter,
         generic_sorter = sorters.get_generic_fuzzy_sorter,
         mappings = {
