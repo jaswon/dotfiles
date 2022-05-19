@@ -34,11 +34,13 @@ return require('packer').startup(function()
     -- Pairs
     use 'windwp/nvim-autopairs'
 
+
     -- Window mgmt
     use 'dstein64/vim-win'
 
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'tpope/vim-repeat'
+    use 'junegunn/vim-easy-align'
 end)
 

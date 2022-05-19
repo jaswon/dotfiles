@@ -27,6 +27,9 @@ runtime window.vim     " window mgmt
 nmap <c-_> <Plug>CommentaryLine
 vmap <c-_> <Plug>Commentary
 
+" EasyAlign
+vmap \| <Plug>(EasyAlign)
+
 " clear highlight
 noremap <leader><space> <Cmd>nohl<cr>
 
