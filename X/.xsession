@@ -10,13 +10,3 @@ xset s off -dpms # prevent screen blanking
 
 # set dpi
 xrandr --dpi 83
-
-# bar
-bar | xargs -d$'\n' -I{} xsetroot -name "{}" &
-
-xsetroot -solid '#eee'
-
-# open term by default
-exec st &
-
-exec dwm
