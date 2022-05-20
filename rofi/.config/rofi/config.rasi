@@ -1,0 +1,44 @@
+configuration {
+    font: "Source Code Pro Semi-Bold 10";
+    fixed-num-lines: true;
+    show-icons: false;
+    sidebar-mode: false;
+}
+
+* {
+    bg-normal: #41778D;
+    bg-focus: #f4a261;
+
+    fg-normal: #ffffff;
+    fg-focus: #ffffff;
+
+    background-color: @bg-normal;
+    text-color: @fg-normal;
+    border: 0;
+}
+
+window {
+    padding: 40;
+    width: 25%;
+}
+
+prompt { enabled: false; }
+
+listview {
+    lines: 15;
+    columns: 1;
+    fixed-height: 0;
+    spacing: 4px;
+    scrollbar: false;
+    padding: 5px 5px 0px 5px;
+}
+
+element {
+    border-radius: 4px;
+    padding: 5px;
+}
+
+element selected {
+    background-color: @bg-focus;
+    text-color: @fg-focus;
+}
