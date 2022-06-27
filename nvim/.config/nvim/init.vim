@@ -3,7 +3,7 @@ let mapleader = "s"
 map s <nop>
 
 " edit rc
-command! Rc :e $MYVIMRC
+command! Rc :leftabove vs $MYVIMRC | Ex
 
 " no escape
 inoremap jk <esc>
