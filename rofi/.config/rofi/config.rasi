@@ -18,7 +18,7 @@ configuration {
 }
 
 window {
-    padding: 40;
+    padding: 30;
     width: 25%;
 }
 
@@ -38,7 +38,7 @@ element {
     padding: 5px;
 }
 
-element selected {
+element selected, element-text selected {
     background-color: @bg-focus;
     text-color: @fg-focus;
 }
