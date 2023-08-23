@@ -42,4 +42,4 @@ set conceallevel=0              " no conceal
 set clipboard+=unnamedplus      " use clipboard register
 set path+=**                    " search subdirectories
 set mouse=a                     " mouse support
-set completeopt=menuone
+set completeopt=menuone,longest
