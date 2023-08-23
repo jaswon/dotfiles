@@ -23,6 +23,11 @@ require('telescope').setup {
             },
         },
     },
+    pickers = {
+        git_files = {
+            show_untracked = true,
+        },
+    },
 }
 
 local map = vim.api.nvim_set_keymap
@@ -36,4 +41,4 @@ end
 
 map('n', '<c-p>', '<cmd>call v:lua.project_files()<cr>', opts)
 map('n', '\\', '<cmd>Telescope live_grep<cr>', opts)
-map('n', '<s-tab>', '<cmd>Telescope buffers<cr>', opts)
+map('n', '<tab>', '<cmd>Telescope buffers<cr>', opts)
