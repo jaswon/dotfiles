@@ -1,8 +1,12 @@
+local telescope = require('telescope')
+
+local utils = require('telescope.utils')
 local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local sorters = require('telescope.sorters')
+local state   = require('telescope.state')
 
-require('telescope').setup {
+telescope.setup {
     defaults = {
         vimgrep_arguments = {
             "rg",
@@ -39,6 +43,12 @@ _G.project_files = function()
   if not ok then builtin.find_files(opts) end
 end
 
+function live_grep_from_buf()
+    builtin.live_grep {
+        -- cwd = utils.buffer_dir()
+    }
+end
+
 map('n', '<c-p>', '<cmd>call v:lua.project_files()<cr>', opts)
-map('n', '\\', '<cmd>Telescope live_grep<cr>', opts)
-map('n', '<tab>', '<cmd>Telescope buffers<cr>', opts)
+vim.keymap.set('n', '\\', live_grep_from_buf, opts)
+map('n', '<s-tab>', '<cmd>Telescope buffers<cr>', opts)
