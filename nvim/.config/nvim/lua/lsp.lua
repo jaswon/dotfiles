@@ -2,7 +2,7 @@ local nvim_lsp = require('lspconfig')
 
 local servers = {
     gopls={},
-    tsserver={},
+    ts_ls={},
     pyright={},
     rust_analyzer={
         assist = {
